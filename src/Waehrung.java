@@ -4,7 +4,7 @@ public class Waehrung {
 	private String kuerzel;
 	private double kurs; // Wechselkurs zum Dollar
 
-	public static void main (String[] arg){
+	public static void main (String[] arg){//Änderung von fabian
 		
 		
 		Waehrung w1 = new Waehrung("Dollar","$",1);
