@@ -3,44 +3,40 @@ public class Waehrung extends Waehrungen{
 	private String name;
 	private String kuerzel;
 	private double kurs; // Wechselkurs zum Dollar
+	
+	public String getName() {
+		return name;
+	}
+
+	public String getKuerzel() {
+		return kuerzel;
+	}
+	
+	public double getKurs() {
+		return kurs;
+	}
 
 	public static void main (String[] arg){
 		
-		
-		Waehrung w1 = new Waehrung("Dollar","$",1);
-		Waehrung w2 = new Waehrung("Rubel","RUB",0.0141);
-		Waehrung w3 = new Waehrung("Euro","€",1.1086);
-		Waehrung w4 = new Waehrung("Yen","¥",0.0091);
-		Waehrung w5 = new Waehrung("SFranken","CHF",1.0509);
-		
-		
-		
-		System.out.println(w1+"\n"+w2+"\n"+w3.umrechnen(20, w2));
-		
-		System.out.println("A= "+(20*1.1086)/0.0141);
 	}
 	
-	
-	public Waehrung() {
-	}
-
 	public Waehrung(String name, String kuerzel, double kurs) {
-		this.setName(name);
-		this.setKuerzel(kuerzel);
-		this.setKurs(kurs);
+		this.name = name;
+		this.kuerzel = kuerzel;
+		this.kurs = kurs;
 	}
 	
 	public long umrechnen(long in,Waehrung ziel){
-		return(long)((in*(double)this.kurs)/ziel.kurs);
+		double zielBetrag = in;
+		zielBetrag = zielBetrag * this.kurs;
+		zielBetrag = zielBetrag / ziel.kurs;
+		return (long) Math.round(zielBetrag * 100)/100;
 	}
-
 
 	public String toString(){
 		return name+" ["+kuerzel+"] 1$ = "+kurs+" "+kuerzel;
 	}
 	
-	
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -52,7 +48,6 @@ public class Waehrung extends Waehrungen{
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -77,31 +72,4 @@ public class Waehrung extends Waehrungen{
 			return false;
 		return true;
 	}
-
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getKuerzel() {
-		return kuerzel;
-	}
-
-	public void setKuerzel(String kuerzel) {
-		this.kuerzel = kuerzel;
-	}
-
-	public double getKurs() {
-		return kurs;
-	}
-
-	public void setKurs(double kurs2) {
-		this.kurs = kurs2;
-	}
-	
-
 }
