@@ -1,3 +1,4 @@
+package tpe_grp_1.aufgabe1.main;
 
 public class Waehrung extends Waehrungen{
 	private String name;
@@ -17,7 +18,10 @@ public class Waehrung extends Waehrungen{
 	}
 
 	public static void main (String[] arg){
-		
+		Konto k = new Konto(Waehrungen.euro,"Jan Spliethoff");
+		k.buche(new Betrag(200,Waehrungen.euro));
+
+		System.out.println(k);
 	}
 	
 	public Waehrung(String name, String kuerzel, double kurs) {
@@ -25,14 +29,21 @@ public class Waehrung extends Waehrungen{
 		this.kuerzel = kuerzel;
 		this.kurs = kurs;
 	}
-	
-	public long umrechnen(long in,Waehrung ziel){
-		double zielBetrag = in;
+
+	/**
+	 *takes betrag exchanges it into dollar into target value
+	 * returns long
+	 * @param betrag
+	 * @param ziel
+     * @return
+     */
+	public long umrechnen(long betrag,Waehrung ziel){
+		double zielBetrag = betrag;
 		zielBetrag = zielBetrag * this.kurs;
 		zielBetrag = zielBetrag / ziel.kurs;
-		return (long) Math.round(zielBetrag * 100)/100;
+		return Math.round(zielBetrag * 100) /100;
 	}
-
+	@Override
 	public String toString(){
 		return name+" ["+kuerzel+"] 1$ = "+kurs+" "+kuerzel;
 	}
