@@ -1,14 +1,10 @@
 public class Waehrungen {
-	//private Waehrung Yen = new Waehrung("Yen",􏰀􏰀"􏰀Y",0.0091);
-	//private Waehrung USD = new Waehrung("US-Dollar",􏰀􏰀"$",1.0);
-	//private Waehrung Eur = new Waehrung("Euro",􏰀􏰀"􏰀€",1,2690);
 	
-
+	static Waehrung dollar = new Waehrung ("Dollar", "$", 1.0000);
+	static Waehrung euro = new Waehrung ("Euro", "€", 1.2690);
+	static Waehrung yen = new Waehrung ("Yen", "¥", 0.0091);
+	static Waehrung rubel = new Waehrung ("Rubel", "RUB", 0.0255);
+	static Waehrung sfranken = new Waehrung ("SFranken", "CHF", 1.0509);
 	
-	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
 
 }
