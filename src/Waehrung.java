@@ -1,15 +1,17 @@
 
-public class Waehrung {
+public class Waehrung extends Waehrungen{
 	private String name;
 	private String kuerzel;
 	private double kurs; // Wechselkurs zum Dollar
 
-	public static void main (String[] arg){//Änderung von fabian
+	public static void main (String[] arg){
 		
 		
 		Waehrung w1 = new Waehrung("Dollar","$",1);
 		Waehrung w2 = new Waehrung("Rubel","RUB",0.0141);
 		Waehrung w3 = new Waehrung("Euro","€",1.1086);
+		Waehrung w4 = new Waehrung("Yen","¥",0.0091);
+		Waehrung w5 = new Waehrung("SFranken","CHF",1.0509);
 		
 		
 		
