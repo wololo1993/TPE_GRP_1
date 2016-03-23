@@ -2,12 +2,21 @@
 public class Betrag {
 
 	private final long betrag;
-	private final String waehrung;
+	public long getBetrag() {
+		return betrag;
+	}
+
+	private Waehrung waehrung;
 	
-	public Betrag(double betrag, String waehrung){
-		this.betrag = (long) (betrag * 100);
+	public Betrag(double betrag, Waehrung waehrung){
+		this.betrag = (long) (betrag * 100)/100;
 		this.waehrung = waehrung;
 	}
+	
+	public long umrechnen(Waehrung ziel){
+		return waehrung.umrechnen(betrag, ziel);
+	}
+	
 	
 	public long addiere(Betrag b){
 		return (this.betrag + b.betrag);

@@ -14,10 +14,14 @@ public class Waehrung extends Waehrungen{
 		Waehrung w5 = new Waehrung("SFranken","CHF",1.0509);
 		
 		
+		Betrag bla = new Betrag(200,Waehrungen.dollar);
 		
-		System.out.println(w1+"\n"+w2+"\n"+w3.umrechnen(20, w2));
+		System.out.println(bla.umrechnen(Waehrungen.euro));
 		
-		System.out.println("A= "+(20*1.1086)/0.0141);
+		
+//		System.out.println(w1+"\n"+w2+"\n"+w3.umrechnen(20, w2));
+//		
+//		System.out.println("A= "+(20*1.1086)/0.0141);
 	}
 	
 	
