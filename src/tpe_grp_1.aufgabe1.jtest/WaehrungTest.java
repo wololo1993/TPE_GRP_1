@@ -26,7 +26,10 @@ public class WaehrungTest {
 
     @Test
     public void testUmrechnen() throws Exception {
-
+        Waehrung waehrung = new Waehrung("Bobo","bob",1.0);
+        Waehrung waehrung2 = new Waehrung("bibi","bib",1.5);
+        long test = waehrung2.umrechnen(200,waehrung);
+        assertEquals(300,test);
     }
 
     @Test

@@ -13,23 +13,43 @@ public class Konto {
         this.saldo = new Betrag(0,waehrung);
     }
 
+    /**
+     * get Inhaber returns String
+     * @return
+     */
     public String getInhaber() {
         return inhaber;
     }
 
+    /**
+     * get Waehrung returns Waehrung
+     * @return
+     */
     public Waehrung getWaehrung() {
         return waehrung;
     }
 
 
     // TODO +- beachten (if (add or sub))
+
+    /**
+     * adds an <Betrag></Betrag> to saldo
+     * @param betrag
+     */
     public void buche(Betrag betrag) {
-        long value = betrag.getWaehrung().umrechnen(betrag.getVorkomma()*100+betrag.getNachkomma(),waehrung);
-        Betrag temp = new Betrag((double)value*betrag.getVorzeichen()/100,waehrung);
+        String vorzeichen;
+        if(betrag.getVorzeichen()==-1) {
+            vorzeichen ="-";
+        } else {
+            vorzeichen ="+";
+        }
+        long value = betrag.getWaehrung().umrechnen(betrag.getBetrag(),betrag.getWaehrung());
+        Betrag temp = new Betrag((double)value/100*betrag.getVorzeichen(),waehrung);
         long baba = saldo.addiere(temp);
-        auszug = auszug.concat(temp.getVorkomma()*temp.getVorzeichen()+"."+temp.getNachkomma()+" "+temp.getWaehrung());
-        saldo = new Betrag(baba,waehrung);
+        auszug = auszug.concat(vorzeichen+temp.getVorkomma()+"."+temp.getNachkomma()+" "+temp.getWaehrung().getKuerzel()+"\n");
+        saldo = new Betrag((double)baba/100*saldo.getVorzeichen(),waehrung);
     }
+
     @Override
     public String toString(){
         return ("Kontoinhaber: "+inhaber+"\n"+
@@ -37,15 +57,27 @@ public class Konto {
                 +"-----------------\n"
                 +auszug
                 +"-----------------\n"
-                +"Saldo: "+saldo);
+                +"Saldo: "+saldo.getVorkomma()+"."+saldo.getNachkomma()+" "+saldo.getWaehrung().getKuerzel());
     }
 
-    public void gebuehren(){
-
+    /**
+     * promille/1000*saldo
+     * @param promille int
+     */
+    public void gebuehren(int promille){
+        double gebuehren = saldo.getAsDouble()*((double)promille/1000);
+        saldo = new Betrag(saldo.getAsDouble()-gebuehren,saldo.getWaehrung());
     }
 
-
+    /**
+     * returns double saldo
+     * @return
+     */
     public double saldo(){
         return ((double)saldo.getVorkomma()*saldo.getVorzeichen())+(saldo.getNachkomma()/100);
+    }
+
+    private double getBetragDouble(){
+        return (double)saldo.getBetrag()/100*saldo.getVorzeichen();
     }
 }
