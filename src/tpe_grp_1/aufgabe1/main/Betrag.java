@@ -2,10 +2,10 @@ package tpe_grp_1.aufgabe1.main;
 
 public class Betrag {
 
-    protected long betrag; //
+    private final long betrag; //
     private final Waehrung waehrung;
 
-    Betrag(double betrag, Waehrung waehrung) {
+    public Betrag(double betrag, Waehrung waehrung) {
         this.betrag = (long) (betrag * 100);
         this.waehrung = waehrung;
     }

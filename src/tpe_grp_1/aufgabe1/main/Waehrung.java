@@ -1,6 +1,6 @@
 package tpe_grp_1.aufgabe1.main;
 
-public class Waehrung extends Waehrungen{
+public final class Waehrung {
 	private String name;
 	private String kuerzel;
 	private double kurs; // Wechselkurs zum Dollar

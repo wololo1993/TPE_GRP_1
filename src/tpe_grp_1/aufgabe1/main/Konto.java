@@ -25,9 +25,9 @@ public class Konto {
     // TODO +- beachten (if (add or sub))
     public void buche(Betrag betrag) {
         long value = betrag.getWaehrung().umrechnen(betrag.getVorkomma()*100+betrag.getNachkomma(),waehrung);
-        Betrag temp = new Betrag(value*betrag.getVorzeichen(),waehrung);
+        Betrag temp = new Betrag((double)value*betrag.getVorzeichen()/100,waehrung);
         long baba = saldo.addiere(temp);
-        auszug = auszug.concat(baba+temp.getWaehrung().toString()+"\n");
+        auszug = auszug.concat(temp.getVorkomma()*temp.getVorzeichen()+"."+temp.getNachkomma()+" "+temp.getWaehrung());
         saldo = new Betrag(baba,waehrung);
     }
     @Override
@@ -38,5 +38,14 @@ public class Konto {
                 +auszug
                 +"-----------------\n"
                 +"Saldo: "+saldo);
+    }
+
+    public void gebuehren(){
+
+    }
+
+
+    public double saldo(){
+        return ((double)saldo.getVorkomma()*saldo.getVorzeichen())+(saldo.getNachkomma()/100);
     }
 }
