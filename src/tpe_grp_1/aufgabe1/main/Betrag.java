@@ -55,8 +55,7 @@ public class Betrag {
      * @return
      */
     double multipliziere(double zahl) {
-        double ergebnis = (this.betrag * zahl);
-        return ergebnis;
+        return (this.betrag * zahl);
     }
 
     /**
@@ -66,8 +65,7 @@ public class Betrag {
      * @return
      */
     double multipliziere(int zahl) {
-        double ergebnis = (this.betrag * zahl);
-        return ergebnis;
+        return (this.betrag * zahl);
     }
 
     /**
@@ -76,8 +74,7 @@ public class Betrag {
      * @return
      */
     long prozent(double prozent) {
-        double prozentwert = (this.betrag / 100) * prozent;
-        return (long) (prozentwert * 100);
+        return (long) (double )((this.betrag / 100) * prozent)*100;
     }
 
     /**
@@ -87,8 +84,7 @@ public class Betrag {
      * @return
      */
     long promille(double promill) {
-        double promillewert = ((this.betrag / 100) * promill);
-        return (long) (promillewert * 100);
+        return (long) (double) ((this.betrag / 100) * promill)*100;
     }
 
     /**
@@ -96,8 +92,7 @@ public class Betrag {
      * @return
      */
     public int getVorkomma() {
-        double vorKomma = (this.betrag / 100);
-        return (int) vorKomma;
+        return (int) (double) (this.betrag / 100);
     }
 
     /**
