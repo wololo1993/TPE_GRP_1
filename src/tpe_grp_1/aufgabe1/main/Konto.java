@@ -15,7 +15,7 @@ public class Konto {
 
     /**
      * get Inhaber returns String
-     * @return
+     * @return String inhaber
      */
     public String getInhaber() {
         return inhaber;
@@ -23,7 +23,7 @@ public class Konto {
 
     /**
      * get Waehrung returns Waehrung
-     * @return
+     * @return waehrung
      */
     public Waehrung getWaehrung() {
         return waehrung;
@@ -37,17 +37,11 @@ public class Konto {
      * @param betrag
      */
     public void buche(Betrag betrag) {
-        String vorzeichen;
-        if(betrag.getVorzeichen()==-1) {
-            vorzeichen ="-";
-        } else {
-            vorzeichen ="+";
-        }
-        long value = betrag.getWaehrung().umrechnen(betrag.getBetrag(),betrag.getWaehrung());
-        Betrag temp = new Betrag((double)value/100*betrag.getVorzeichen(),waehrung);
-        long baba = saldo.addiere(temp);
-        auszug = auszug.concat(vorzeichen+temp.getVorkomma()+"."+temp.getNachkomma()+" "+temp.getWaehrung().getKuerzel()+"\n");
-        saldo = new Betrag((double)baba/100*saldo.getVorzeichen(),waehrung);
+
+        long value = betrag.getWaehrung().umrechnen(betrag.getBetrag(),waehrung);
+        Betrag temp = new Betrag((double)value/100,waehrung);
+        saldo = new Betrag((double)saldo.addiere(temp)/100,waehrung);
+        auszug = auszug.concat(temp.getAsDouble()+" "+temp.getWaehrung().getKuerzel()+"\n");
     }
 
     @Override
@@ -71,13 +65,10 @@ public class Konto {
 
     /**
      * returns double saldo
-     * @return
+     * @return double saldo
      */
     public double saldo(){
-        return ((double)saldo.getVorkomma()*saldo.getVorzeichen())+(saldo.getNachkomma()/100);
+        return this.saldo.getAsDouble();
     }
 
-    private double getBetragDouble(){
-        return (double)saldo.getBetrag()/100*saldo.getVorzeichen();
-    }
 }

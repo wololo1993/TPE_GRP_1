@@ -135,7 +135,7 @@ public class Betrag {
      * @return
      */
     public int getVorzeichen() {
-        if (betrag <= 0) {
+        if(this.betrag < 0){
             return -1;
         } else {
             return 1;

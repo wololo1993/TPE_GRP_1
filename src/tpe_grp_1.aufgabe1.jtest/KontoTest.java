@@ -32,6 +32,15 @@ public class KontoTest {
 
     }
 
+
+    @Test
+    public void testBuche2() throws Exception {
+        Konto konto = new Konto(Waehrungen.dollar,"Jan Spliethoff");
+        konto.buche(new Betrag(-200,konto.getWaehrung()));
+        assertEquals(-200,konto.saldo(),0.001);
+
+    }
+
     @Test
     public void testToString() throws Exception {
 
