@@ -34,10 +34,9 @@ public class Betrag {
      * @param b
      * @return
      */
-    
     public long addiere(Betrag b) {
         return (this.betrag + b.betrag);
-    } 
+    }
 
     /**
      * returns double
