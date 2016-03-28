@@ -35,7 +35,7 @@ public final class Waehrung {
 	 * returns long
 	 * @param betrag
 	 * @param ziel
-     * @return
+     * @return long
      */
 	public long umrechnen(long betrag,Waehrung ziel){
 		double zielBetrag = betrag;

@@ -56,14 +56,19 @@ public class BetragTest {
     @Test
     public void testGetVorkomma() throws Exception {
         Betrag betrag = new Betrag(-201.0,Waehrungen.yen);
-        assertEquals(201,betrag.getVorkomma());
+        assertEquals(-201,betrag.getVorkomma());
     }
 
     @Test
     public void testGetNachkomma() throws Exception {
         Betrag betrag = new Betrag(-201.3847,Waehrungen.yen);
-        assertEquals(38,betrag.getNachkomma());
-        //wieso gibt es da -38 zurück ?
+        assertEquals(-38,betrag.getNachkomma());
+    }
+
+    @Test
+    public void testGetNachkomma2() throws Exception {
+        Betrag betrag = new Betrag(-201.3847,Waehrungen.yen);
+        assertEquals(-38,betrag.getNachkomma());
     }
 
     @Test
