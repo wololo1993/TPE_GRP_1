@@ -15,7 +15,7 @@ public class Konto {
 
     /**
      * get Inhaber returns String
-     * @return
+     * @return String inhaber
      */
     public String getInhaber() {
         return inhaber;
@@ -23,7 +23,7 @@ public class Konto {
 
     /**
      * get Waehrung returns Waehrung
-     * @return
+     * @return waehrung
      */
     public Waehrung getWaehrung() {
         return waehrung;
@@ -71,7 +71,7 @@ public class Konto {
 
     /**
      * returns double saldo
-     * @return
+     * @return double saldo
      */
     public double saldo(){
         return ((double)saldo.getVorkomma()*saldo.getVorzeichen())+(saldo.getNachkomma()/100);

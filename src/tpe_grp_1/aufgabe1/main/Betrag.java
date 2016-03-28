@@ -4,8 +4,14 @@ public class Betrag {
 
     private final long betrag; //
     private final Waehrung waehrung;
+    private final int vorzeichen;
 
     public Betrag(double betrag, Waehrung waehrung) {
+        if(betrag < 0){
+            vorzeichen = -1;
+        } else{
+            vorzeichen = 1;
+        }
         this.betrag = (long) (betrag * 100);
         this.waehrung = waehrung;
     }
@@ -121,7 +127,7 @@ public class Betrag {
     public double getAsDouble() {
 
         double doubleZahl = this.betrag;
-        return (doubleZahl / 100);
+        return (doubleZahl / 100)*vorzeichen;
     }
 
 
@@ -134,10 +140,6 @@ public class Betrag {
      * @return
      */
     public int getVorzeichen() {
-        if (betrag <= 0) {
-            return -1;
-        } else {
-            return 1;
-        }
+        return vorzeichen;
     }
 }
