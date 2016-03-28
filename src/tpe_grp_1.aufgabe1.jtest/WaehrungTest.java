@@ -1,4 +1,4 @@
-package tpe_grp_1.aufgabe1.jtest;
+
 
 import org.junit.Test;
 import tpe_grp_1.aufgabe1.main.*;

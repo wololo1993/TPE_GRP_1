@@ -20,7 +20,7 @@ public final class Waehrung {
 	public static void main (String[] arg){
 		Konto k = new Konto(Waehrungen.euro,"Jan Spliethoff");
 		k.buche(new Betrag(200,Waehrungen.euro));
-
+		
 		System.out.println(k);
 	}
 	
