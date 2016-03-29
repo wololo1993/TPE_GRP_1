@@ -1,6 +1,6 @@
-package tpe_grp_1.aufgabe1.jtest;
+package tpe_grp_1.uebung1.jtest;
 
-import tpe_grp_1.aufgabe1.main.*;
+import tpe_grp_1.uebung1.main.*;
 
 import org.junit.Test;
 

@@ -1,7 +1,7 @@
-package tpe_grp_1.aufgabe1.jtest;
+package tpe_grp_1.uebung1.jtest;
 
 import org.junit.Test;
-import tpe_grp_1.aufgabe1.main.*;
+import tpe_grp_1.uebung1.main.*;
 
 import static org.junit.Assert.*;
 
