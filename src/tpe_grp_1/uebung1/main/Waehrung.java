@@ -1,7 +1,6 @@
 package tpe_grp_1.uebung1.main;
 
 /**
- *
  * @Author TPE_GRP_1
  */
 public class Waehrung {
@@ -24,17 +23,17 @@ public class Waehrung {
     /**
      * Constructor
      *
-     * @param name String
+     * @param name    String
      * @param kuerzel String
-     * @param kurs double
+     * @param kurs    double
      */
-      public Waehrung(String name, String kuerzel, double kurs) {
-      this.name = name;
-      this.kuerzel = kuerzel;
-      this.kurs = kurs;
-      }
+    public Waehrung(String name, String kuerzel, double kurs) {
+        this.name = name;
+        this.kuerzel = kuerzel;
+        this.kurs = kurs;
+    }
 
-     /**
+    /**
      * takes betrag exchanges it into dollar into target value
      * returns long
      *
@@ -46,7 +45,7 @@ public class Waehrung {
         double zielBetrag = betrag;
         zielBetrag = zielBetrag * this.kurs;
         zielBetrag = zielBetrag / ziel.kurs;
-        return Math.round(zielBetrag * 100) / 100;
+        return (long) zielBetrag;
     }
 
     @Override

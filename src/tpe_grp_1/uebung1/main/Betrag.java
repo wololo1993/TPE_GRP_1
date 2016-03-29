@@ -1,7 +1,6 @@
 package tpe_grp_1.uebung1.main;
 
 /**
- *
  * @Author TPE_GRP_1
  */
 public class Betrag {
@@ -51,16 +50,6 @@ public class Betrag {
         return (this.betrag + b.betrag);
     }
 
-    /**
-     * adds betrag+b
-     *
-     * @param b double
-     * @return long
-     */
-    protected long addiere(double b) {
-        return (this.betrag + (long) (b * 100));
-    }
-
 
     /**
      * betrag - b
@@ -103,23 +92,23 @@ public class Betrag {
     }
 
     /**
-     * betrag*prozent
+     * betrag*prozent/100
      *
      * @param prozent double
      * @return long
      */
     protected long prozent(double prozent) {
-        return (long) (double) ((this.betrag / 100) * prozent) * 100;
+        return (long) (this.betrag * prozent / 100);
     }
 
     /**
-     * betrag * promill
+     * betrag * promill/1000
      *
      * @param promill double
      * @return long
      */
     protected long promille(double promill) {
-        return (long)(this.betrag * promill);
+        return (long) (this.betrag * promill / 1000);
     }
 
     /**
@@ -128,7 +117,7 @@ public class Betrag {
      * @return int
      */
     public int getVorkomma() {
-        return (int) ((double)this.betrag / 100)*this.getVorzeichen();
+        return (int) ((double) this.betrag / 100) * this.getVorzeichen();
     }
 
     /**
@@ -137,16 +126,17 @@ public class Betrag {
      * @return int
      */
     public int getNachkomma() {
-        return (int) this.betrag % 100*this.getVorzeichen();
+        return (int) this.betrag % 100 * this.getVorzeichen();
     }
 
     @Override
     public String toString() {
-        return this.getVorkomma()*this.getVorzeichen() + "," + this.getNachkomma() + " " + waehrung.getKuerzel();
+        return this.getVorkomma() * this.getVorzeichen() + "," + this.getNachkomma() + " " + waehrung.getKuerzel();
     }
 
     /**
      * returns betrag as double
+     *
      * @return double
      */
     public double getAsDouble() {

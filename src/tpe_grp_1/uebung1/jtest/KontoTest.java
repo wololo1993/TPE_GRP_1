@@ -81,15 +81,15 @@ public class KontoTest {
         konto.buche(new Betrag(200.2, konto.getWaehrung()));
         konto.buche(new Betrag(-10, konto.getWaehrung()));
         konto.buche(new Betrag(20, konto.getWaehrung()));
-        String expected = "Kontoinhaber: Gunther Gaus\n"+
-                "Währung: "+"Dollar\n"+
-                "-----------------\n"+
-                "200,20 $\n"+
-                "-10,0 $\n"+
-                "20,0 $\n"+
-                "-----------------\n"+
-                "Saldo: "+"210,20 $";
-        assertEquals(expected,konto.toString());
+        String expected = "Kontoinhaber: Gunther Gaus\n" +
+                "Währung: " + "Dollar\n" +
+                "-----------------\n" +
+                "200,20 $\n" +
+                "-10,0 $\n" +
+                "20,0 $\n" +
+                "-----------------\n" +
+                "Saldo: " + "210,20 $";
+        assertEquals(expected, konto.toString());
     }
 
     /**
@@ -99,20 +99,20 @@ public class KontoTest {
     public void testToString2() {
         konto.buche(new Betrag(-200.33, konto.getWaehrung()));
         konto.buche(new Betrag(-50, konto.getWaehrung()));
-        String expected = "Kontoinhaber: Gunther Gaus\n"+
-                "Währung: "+"Dollar\n"+
-                "-----------------\n"+
-                "-200,33 $\n"+
-                "-50,0 $\n"+
-                "-----------------\n"+
-                "Saldo: "+"-250,33 $";
-        assertEquals(expected,konto.toString());
+        String expected = "Kontoinhaber: Gunther Gaus\n" +
+                "Währung: " + "Dollar\n" +
+                "-----------------\n" +
+                "-200,33 $\n" +
+                "-50,0 $\n" +
+                "-----------------\n" +
+                "Saldo: " + "-250,33 $";
+        assertEquals(expected, konto.toString());
     }
 
     @Test
     public void testGebuehren() {
         konto.buche(new Betrag(100.0, konto.getWaehrung()));
-        konto.gebuehren(0.001);
+        konto.gebuehren(100);
         assertEquals(90.0, konto.saldo(), 0.001);
     }
 
@@ -122,7 +122,7 @@ public class KontoTest {
     @Test
     public void testGebuehren2() {
         konto.buche(new Betrag(-100.0, konto.getWaehrung()));
-        konto.gebuehren(0.001);
+        konto.gebuehren(100);
         assertEquals(-110.0, konto.saldo(), 0.001);
     }
 

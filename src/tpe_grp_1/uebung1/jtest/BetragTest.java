@@ -40,13 +40,15 @@ public class BetragTest {
 
     @Test
     public void testGetNachkomma2() {
-        Betrag betrag = new Betrag(-201.3847, Waehrungen.yen);
+        Betrag betrag = new Betrag(-201.3867, Waehrungen.yen);
         assertEquals(38, betrag.getNachkomma());
     }
 
     @Test
     public void testToString() {
         Betrag betrag = new Betrag(-201.3847, Waehrungen.yen);
+        String expected = "-201,38 ¥";
+        assertEquals(expected, betrag.toString());
     }
 
     @Test
@@ -67,6 +69,9 @@ public class BetragTest {
         assertEquals(-1, betrag.getVorzeichen());
     }
 
+    /**
+     * Test 0
+     */
     @Test
     public void testGetVorzeichen2() {
         Betrag betrag = new Betrag(0.0, Waehrungen.yen);
