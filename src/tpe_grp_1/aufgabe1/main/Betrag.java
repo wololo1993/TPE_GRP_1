@@ -4,7 +4,7 @@ package tpe_grp_1.aufgabe1.main;
  *
  * @Author TPE_GRP_1
  */
-public final class Betrag {
+public class Betrag {
 
     private final long betrag; //
     private final Waehrung waehrung;
@@ -96,14 +96,14 @@ public final class Betrag {
      * multiply betrag*zahl
      *
      * @param zahl int
-     * @return
+     * @return double
      */
     protected double multipliziere(int zahl) {
         return (this.betrag * zahl);
     }
 
     /**
-     * return long betrag*prozent
+     * betrag*prozent
      *
      * @param prozent double
      * @return long
@@ -113,7 +113,6 @@ public final class Betrag {
     }
 
     /**
-     * returns long
      * betrag * promill
      *
      * @param promill double
@@ -129,7 +128,7 @@ public final class Betrag {
      * @return int
      */
     public int getVorkomma() {
-        return (int) (double) (this.betrag / 100);
+        return (int) ((double)this.betrag / 100)*this.getVorzeichen();
     }
 
     /**
@@ -138,18 +137,16 @@ public final class Betrag {
      * @return int
      */
     public int getNachkomma() {
-        return (int) this.betrag % 100;
+        return (int) this.betrag % 100*this.getVorzeichen();
     }
 
     @Override
     public String toString() {
-        return this.getVorkomma() + "." + this.getNachkomma() * this.getVorzeichen() + " " + waehrung.getKuerzel();
+        return this.getVorkomma()*this.getVorzeichen() + "," + this.getNachkomma() + " " + waehrung.getKuerzel();
     }
 
     /**
-     * return double
      * returns betrag as double
-     *
      * @return double
      */
     public double getAsDouble() {

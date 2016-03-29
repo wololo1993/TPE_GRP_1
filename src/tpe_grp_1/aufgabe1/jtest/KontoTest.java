@@ -84,11 +84,11 @@ public class KontoTest {
         String expected = "Kontoinhaber: Gunther Gaus\n"+
                 "Währung: "+"Dollar\n"+
                 "-----------------\n"+
-                "200.20 $\n"+
-                "-10.0 $\n"+
-                "20.0 $\n"+
+                "200,20 $\n"+
+                "-10,0 $\n"+
+                "20,0 $\n"+
                 "-----------------\n"+
-                "Saldo: "+"210.20 $";
+                "Saldo: "+"210,20 $";
         assertEquals(expected,konto.toString());
     }
 
@@ -102,10 +102,10 @@ public class KontoTest {
         String expected = "Kontoinhaber: Gunther Gaus\n"+
                 "Währung: "+"Dollar\n"+
                 "-----------------\n"+
-                "-200.33 $\n"+
-                "-50.0 $\n"+
+                "-200,33 $\n"+
+                "-50,0 $\n"+
                 "-----------------\n"+
-                "Saldo: "+"-250.33 $";
+                "Saldo: "+"-250,33 $";
         assertEquals(expected,konto.toString());
     }
 

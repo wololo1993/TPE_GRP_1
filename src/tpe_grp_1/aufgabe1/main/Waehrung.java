@@ -4,10 +4,10 @@ package tpe_grp_1.aufgabe1.main;
  *
  * @Author TPE_GRP_1
  */
-public final class Waehrung {
-    private String name;
-    private String kuerzel;
-    private double kurs; // Wechselkurs zum Dollar
+public class Waehrung {
+    private final String name;
+    private final String kuerzel;
+    private final double kurs; // Wechselkurs zum Dollar
 
     public String getName() {
         return name;
