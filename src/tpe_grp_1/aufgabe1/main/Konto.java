@@ -1,20 +1,31 @@
 package tpe_grp_1.aufgabe1.main;
 
+/**
+ *
+ * @Author TPE_GRP_1
+ */
 public class Konto {
+
     private String inhaber;
     private Waehrung waehrung;
-    private String auszug="";
+    private String auszug = "";
     private Betrag saldo;
 
 
+    /**
+     *Constructor
+     * @param waehrung Waehrung
+     * @param inhaber String
+     */
     public Konto(Waehrung waehrung, String inhaber) {
         this.waehrung = waehrung;
         this.inhaber = inhaber;
-        this.saldo = new Betrag(0,waehrung);
+        this.saldo = new Betrag(0, waehrung);
     }
 
     /**
      * get Inhaber returns String
+     *
      * @return String inhaber
      */
     public String getInhaber() {
@@ -22,52 +33,52 @@ public class Konto {
     }
 
     /**
-     * get Waehrung returns Waehrung
-     * @return waehrung
+     *
+     * @return waehrung <b>Waehrung</b>
      */
     public Waehrung getWaehrung() {
         return waehrung;
     }
 
 
-    // TODO +- beachten (if (add or sub))
-
     /**
-     * adds an <Betrag></Betrag> to saldo
-     * @param betrag
+     * adds an <i>Betrag</i> to saldo
+     *
+     * @param betrag Betrag
      */
     public void buche(Betrag betrag) {
-
-        long value = betrag.getWaehrung().umrechnen(betrag.getBetrag(),waehrung);
-        Betrag temp = new Betrag((double)value/100,waehrung);
-        saldo = new Betrag((double)saldo.addiere(temp)/100,waehrung);
-        auszug = auszug.concat(temp.getAsDouble()+" "+temp.getWaehrung().getKuerzel()+"\n");
+        Betrag temp = betrag.umrechnen(waehrung);
+        saldo = new Betrag((double) saldo.addiere(temp)/100, waehrung);
+        auszug = auszug.concat(temp.toString()+ "\n");
     }
 
     @Override
-    public String toString(){
-        return ("Kontoinhaber: "+inhaber+"\n"+
-                "Währung: "+waehrung.getName()+"\n"
-                +"-----------------\n"
-                +auszug
-                +"-----------------\n"
-                +"Saldo: "+saldo.getVorkomma()+"."+saldo.getNachkomma()+" "+saldo.getWaehrung().getKuerzel());
+    public String toString() {
+        return ("Kontoinhaber: " + inhaber + "\n" +
+                "Währung: " + waehrung.getName() + "\n"
+                + "-----------------\n"
+                + auszug
+                + "-----------------\n"
+                + "Saldo: " + saldo.toString());
     }
 
     /**
-     * promille/1000*saldo
-     * @param promille int
+     * promille*saldo
+     *
+     * @param promille double
      */
-    public void gebuehren(int promille){
-        double gebuehren = saldo.getAsDouble()*((double)promille/1000);
-        saldo = new Betrag(saldo.getAsDouble()-gebuehren,saldo.getWaehrung());
+    public void gebuehren(double promille) {
+        long gebuehren = (saldo.promille(promille) * saldo.getVorzeichen());
+        auszug = auszug.concat("-"+gebuehren+" "+waehrung.getKuerzel()+" (gebuehren)\n");
+        saldo = new Betrag(saldo.subtrahiere(gebuehren) / 100, saldo.getWaehrung());
     }
 
     /**
      * returns double saldo
+     *
      * @return double saldo
      */
-    public double saldo(){
+    public double saldo() {
         return this.saldo.getAsDouble();
     }
 
