@@ -1,7 +1,6 @@
 package tpe_grp_1.aufgabe1.main;
 
 /**
- *
  * @Author TPE_GRP_1
  */
 public class Konto {
