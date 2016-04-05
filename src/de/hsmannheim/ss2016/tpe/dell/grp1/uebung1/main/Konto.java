@@ -1,4 +1,4 @@
-package tpe_grp_1.uebung1.main;
+package de.hsmannheim.ss2016.tpe.dell.grp1.uebung1.main;
 
 /**
  * @Author TPE_GRP_1
@@ -33,7 +33,7 @@ public class Konto {
     }
 
     /**
-     * @return waehrung <b>Waehrung</b>
+     * @return waehrung <key>Waehrung</key>
      */
     public Waehrung getWaehrung() {
         return waehrung;

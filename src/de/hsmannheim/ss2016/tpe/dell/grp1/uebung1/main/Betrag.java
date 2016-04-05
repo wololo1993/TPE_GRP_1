@@ -1,4 +1,4 @@
-package tpe_grp_1.uebung1.main;
+package de.hsmannheim.ss2016.tpe.dell.grp1.uebung1.main;
 
 /**
  * @Author TPE_GRP_1
@@ -41,7 +41,7 @@ public class Betrag {
     }
 
     /**
-     * adds betrag+b
+     * adds betrag+key
      *
      * @param b double
      * @return long
@@ -52,7 +52,7 @@ public class Betrag {
 
 
     /**
-     * betrag - b
+     * betrag - key
      *
      * @param b Betrag
      * @return double
@@ -62,7 +62,7 @@ public class Betrag {
     }
 
     /**
-     * betrag - b
+     * betrag - key
      *
      * @param b double
      * @return double

@@ -1,8 +1,10 @@
-package tpe_grp_1.uebung1.jtest;
+package de.hsmannheim.ss2016.tpe.dell.grp1.uebung1.jtest;
 
+import de.hsmannheim.ss2016.tpe.dell.grp1.uebung1.main.Betrag;
+import de.hsmannheim.ss2016.tpe.dell.grp1.uebung1.main.Konto;
+import de.hsmannheim.ss2016.tpe.dell.grp1.uebung1.main.Waehrungen;
 import org.junit.Before;
 import org.junit.Test;
-import tpe_grp_1.uebung1.main.*;
 
 import static org.junit.Assert.*;
 
