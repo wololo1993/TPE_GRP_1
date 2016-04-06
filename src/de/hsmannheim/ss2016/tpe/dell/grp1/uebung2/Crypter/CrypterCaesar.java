@@ -1,11 +1,10 @@
-package de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.Crypter;
+package de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.crypter;
 
-import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.Exeption.CrypterException;
-
+import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.exeption.CrypterException;
+/**
+ * @Author TPE_GRP_1
+ */
 class CrypterCaesar extends CrypterCase {
-
-   private int codeA = ((int)'A')-1;
-
 
    @Override
    public void reset() {
@@ -47,10 +46,10 @@ class CrypterCaesar extends CrypterCase {
 
     /**
      *
-    * getIndex of Char (char to int)
-    * @param c char
-    * @return int
-    */
+     * getIndex of Char (char to int)
+     * @param c char
+     * @return int
+     */
    private int getIndex(char c){
        int i = ((int)c)-codeA;
        return i;
@@ -58,8 +57,8 @@ class CrypterCaesar extends CrypterCase {
 
     /**
      * getChar of int (int to char)
-    * @param i
-     * @return
+     * @param i int
+     * @return char
      */
    private char getChar(int i){
        while(i > LENGTHA){

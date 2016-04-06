@@ -1,9 +1,10 @@
-package de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.Crypter;
+package de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.crypter;
 
 /**
  * Enum of all Crypters
+ * @Author TPE_GRP_1
  */
-public enum CrypterEnum {
+ enum CrypterEnum {
     CAESAR(new CrypterCaesar()),SUB(new CrypterSubstitution()),XOR(new CrypterXOR());
 
     private CrypterCase crypter;

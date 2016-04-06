@@ -1,23 +1,22 @@
 package de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.tests;
 
-import org.junit.Before;
 import org.junit.Test;
 
-import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.Crypter.Crypter;
-import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.Exeption.CrypterException;
+import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.crypter.Crypter;
+import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.exeption.CrypterException;
 import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.key.Key;
-import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.Crypter.CrypterFactory;
+import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.crypter.CrypterFactory;
 
 import static org.junit.Assert.assertTrue;
 
+/**
+ * @Author TPE_GRP_1
+ */
 public class CrypterCaseTest {
 
-    @Before
-    public void setUp() throws Exception {
-    }
-
     /**
-     * geht den ganze nString durch
+     * geht jeden char in reihenfolge mit Crypter.verschluesseln durch
+     * und gibt das Ergebnis als String zurück
      * @param string String
      * @param crypter Crypter
      * @return String
@@ -37,10 +36,11 @@ public class CrypterCaseTest {
     }
 
     /**
-     * geht den ganze nString durch
-     * @param string
-     * @param crypter
-     * @return
+     * geht jeden char in reihenfolge mit Crypter.entschlüsseln durch
+     * und gibt das Ergebnis als String zurück
+     * @param string String
+     * @param crypter Crypter
+     * @return String
      */
     private String entschluessleString(String string, Crypter crypter){
         String erg = "";
@@ -67,7 +67,7 @@ public class CrypterCaseTest {
     @Test
     public void testVerschluesselnCaesar() throws Exception {
 
-        Key key= new Key("C");
+        Key<String> key= new Key("C");
         Crypter c = CrypterFactory.getCrypter("CAESAR",key);
         String string="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         String erg = verschluesselString(string,c);
@@ -83,7 +83,7 @@ public class CrypterCaseTest {
 
     @Test
     public void testEntschluesselnCaesar() throws Exception {
-        Key key= new Key("C");
+        Key<String> key= new Key("C");
         Crypter c = CrypterFactory.getCrypter("CAESAR",key);
         String string = "DEFGHIJKLMNOPQRSTUVWXYZABC";
         String erg = entschluessleString(string,c);
@@ -96,7 +96,7 @@ public class CrypterCaseTest {
     @Test
     public void testVerschluesselnSUB() throws Exception {
 
-        Key key= new Key("UFLPWDRASJMCONQYBVTEXHZKGI");
+        Key<String> key= new Key("UFLPWDRASJMCONQYBVTEXHZKGI");
         Crypter c = CrypterFactory.getCrypter("SUB",key);
         String string="WIKIPEDIAISTINFORMATIV";
         String erg = verschluesselString(string,c);
@@ -108,7 +108,7 @@ public class CrypterCaseTest {
 
     @Test
     public void testEntschluesselnSub() throws Exception {
-        Key key= new Key("UFLPWDRASJMCONQYBVTEXHZKGI");
+        Key<String> key= new Key("UFLPWDRASJMCONQYBVTEXHZKGI");
         Crypter c = CrypterFactory.getCrypter("SUB",key);
         String string = "ZSMSYWPSUSTESNDQVOUESH";
         String erg = entschluessleString(string,c);
@@ -120,7 +120,7 @@ public class CrypterCaseTest {
 
     @Test
     public void testVerschluesselnXOR() throws Exception {
-        Key key= new Key("TPERULES");
+        Key<String> key= new Key("TPERULES");
         Crypter c = CrypterFactory.getCrypter("XOR",key);
         String string="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         String erg = verschluesselString(string,c);
@@ -129,7 +129,7 @@ public class CrypterCaseTest {
     }
     @Test
     public void testEntschluesselnXOR() throws Exception {
-        Key key= new Key("TPERULES");
+        Key<String> key= new Key("TPERULES");
         Crypter c = CrypterFactory.getCrypter("XOR",key);
         String string="URFVPJB[]ZN^XBJCEBVF@ZRKMJ";
         String erg = entschluessleString(string,c);
@@ -148,10 +148,6 @@ public class CrypterCaseTest {
         Key keySub = new Key("MNBVCXYLKJHGFDSAPOIUZTREWQ");
         Key keyCaesar = new Key("V");
         Key keyXOR = new Key("EINSCHLUESSEL");
-
-        int w = ((int)'S')-((int)'A');
-        int q = ((int)'E')-((int)'A');
-        int e = (q^w)+((int)'A');
 
         //XOR
         c = CrypterFactory.getCrypter("XOR",keyXOR);

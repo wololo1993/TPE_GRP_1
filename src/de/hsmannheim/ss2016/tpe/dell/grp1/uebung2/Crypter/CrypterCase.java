@@ -1,13 +1,16 @@
-package de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.Crypter;
+package de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.crypter;
 
- import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.Exeption.CrypterException;
+ import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.exeption.CrypterException;
  import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.key.Key;
-
-public abstract class CrypterCase implements Crypter {
+/**
+ * @Author TPE_GRP_1
+ */
+abstract class CrypterCase implements Crypter {
 
     protected Key key;
     protected char chara;
     protected final int LENGTHA = 26;
+    protected final int codeA =((int) 'A') - 1;
 
     /**
      * set Key

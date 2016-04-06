@@ -1,6 +1,6 @@
-package de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.Crypter;
+package de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.crypter;
 
-import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.Exeption.CrypterException;
+import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.exeption.CrypterException;
 
 /**
  * Grundlegendes Interface, um Verschl̈usselung durchzuf̈uhren. Mit
