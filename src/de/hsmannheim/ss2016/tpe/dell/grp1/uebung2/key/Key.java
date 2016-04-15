@@ -4,7 +4,7 @@ package de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.key;
  * Key der einen String enthält
  */
 public class Key<T> {
-    private T key;
+    private final T key;
 
     /**
      * Erstellt neuen key mit String
@@ -19,7 +19,7 @@ public class Key<T> {
      * @return String
      */
     public String getKey() {
-        return toString();
+        return toString().toUpperCase();
     }
 
     @Override
