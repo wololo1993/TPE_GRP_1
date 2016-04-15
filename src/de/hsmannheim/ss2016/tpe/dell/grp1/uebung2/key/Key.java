@@ -8,14 +8,16 @@ public class Key<T> {
 
     /**
      * Erstellt neuen key mit String
+     *
      * @param key String
      */
-    public Key(T key){
+    public Key(T key) {
         this.key = key;
     }
 
     /**
      * get key returns to String
+     *
      * @return String
      */
     public String getKey() {
@@ -23,7 +25,7 @@ public class Key<T> {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return key.toString();
     }
 }

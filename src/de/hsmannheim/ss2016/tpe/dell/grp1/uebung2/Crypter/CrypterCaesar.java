@@ -1,72 +1,79 @@
 package de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.crypter;
 
 import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.exeption.CrypterException;
+import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.key.Key;
+
 /**
  * @Author TPE_GRP_1
  */
-class CrypterCaesar extends CrypterCase {
+class CrypterCaesar extends CrypterCaseCodeA {
 
-   @Override
-   public void reset() {
+    private final int EXPECTEDLENGTH = 1;
 
-   }
+    protected CrypterCaesar(Key key) {
+        super(key);
+    }
 
-   @Override
-   public char verschluesseln(char klartextZeichen) throws CrypterException {
-       toUpperCase();
-       char erg = 0;
-       try {
-           if (key.getKey().length() != 1) {
-               throw new CrypterException();
-           }
-          erg = getChar(getIndex(klartextZeichen) + (getIndex(key.getKey().charAt(0))));
 
-       } catch (CrypterException e) {
-           System.out.println("Key ist falsch" + e);
-       }
-       return erg;
-   }
+    @Override
+    public void reset() {
 
-   @Override
-   public char entschluesseln(char cypherTextZeichen) throws CrypterException {
-       toUpperCase();
-       char erg = 0;
+    }
 
-       try {
-           if (key.getKey().length() != 1) {
-               throw new CrypterException();
-           }
+    @Override
+    public char verschluesseln(char klartextZeichen) throws CrypterException {
+        char erg;
 
-           erg = getChar(getIndex(cypherTextZeichen)-getIndex(key.getKey().charAt(0)));
-       } catch (CrypterException e) {
-           System.out.println("Key ist falsch : "+this.key+"\n@"+this.chara+"\n"+ e);
-       }
-       return erg;
-   }
+        klartextZeichen = toUpperCase(klartextZeichen);
+
+        if (key.getKey().length() != 1) {
+            throw new CrypterException("Wrong Key length, should be : " + EXPECTEDLENGTH + " is : " + this.key.getKey().length());
+        }
+        erg = getChar(getIndex(klartextZeichen) + (getIndex(key.getKey().charAt(0))));
+
+
+        return erg;
+    }
+
+    @Override
+    public char entschluesseln(char cypherTextZeichen) throws CrypterException {
+        char erg;
+
+        cypherTextZeichen = toUpperCase(cypherTextZeichen);
+
+        if (key.getKey().length() != 1) {
+            throw new CrypterException("Wrong Key length, should be : " + EXPECTEDLENGTH + " is : " + this.key.getKey().length());
+        }
+
+        erg = getChar(getIndex(cypherTextZeichen) - getIndex(key.getKey().charAt(0)));
+
+        return erg;
+
+    }
 
     /**
-     *
      * getIndex of Char (char to int)
+     *
      * @param c char
      * @return int
      */
-   private int getIndex(char c){
-       int i = ((int)c)-codeA;
-       return i;
-   }
+    protected int getIndex(char c) {
+        return ((int) c) - codeA;
+    }
 
     /**
      * getChar of int (int to char)
+     *
      * @param i int
      * @return char
      */
-   private char getChar(int i){
-       while(i > LENGTHA){
-           i = i - LENGTHA;
-       }
-       while(i < 1){
-           i = LENGTHA +i;
-       }
-       return (char)(i+codeA);
-   }
+    protected char getChar(int i) {
+        while (i > LENGTHA) {
+            i = i - LENGTHA;
+        }
+        while (i < 1) {
+            i = LENGTHA + i;
+        }
+        return (char) (i + codeA);
+    }
 }

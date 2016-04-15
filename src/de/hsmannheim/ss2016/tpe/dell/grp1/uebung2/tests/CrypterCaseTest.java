@@ -13,7 +13,6 @@ import static org.junit.Assert.*;
  * @Author TPE_GRP_1
  */
 public class CrypterCaseTest {
-
     /**
      * geht jeden char in reihenfolge mit Crypter.verschluesseln durch
      * und gibt das Ergebnis als String zurück
@@ -22,7 +21,7 @@ public class CrypterCaseTest {
      * @param crypter Crypter
      * @return String
      */
-    private String verschluesselString(String string, Crypter crypter){
+    private String verschluesselString(String string, Crypter crypter) {
         String erg = "";
 
         for (int i = 0; i < string.length(); i++) {
@@ -165,7 +164,7 @@ public class CrypterCaseTest {
      * @throws Exception
      */
     @Test
-    public void resetTest()  {
+    public void resetTest() {
         Key<String> key = new Key<>("SADIUH");
         Crypter c = CrypterFactory.getCrypter("XOR", key);
 

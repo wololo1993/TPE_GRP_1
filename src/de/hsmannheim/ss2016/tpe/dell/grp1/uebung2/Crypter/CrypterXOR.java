@@ -3,9 +3,13 @@ package de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.crypter;
 import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.exeption.CrypterException;
 import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.key.Key;
 
-class CrypterXOR extends CrypterCase {
+class CrypterXOR extends CrypterCaseCodeA {
     private int position = 0;
-    private char[] buchstabenZeichen = buchstabenZeichen();
+    private final char[] BUCHSTABENZEICHEN = buchstabenZeichen();
+
+    protected CrypterXOR(Key key) {
+        super(key);
+    }
 
     private char[] buchstabenZeichen() {
         char[] buchstabenZeichen = new char[32];
@@ -20,7 +24,6 @@ class CrypterXOR extends CrypterCase {
         buchstabenZeichen[31] = '_';
 
         return buchstabenZeichen;
-
     }
 
     @Override
@@ -55,8 +58,7 @@ class CrypterXOR extends CrypterCase {
     private char aXorB(char aC, char bC) {
         int aI = getIndex(aC);
         int bI = getIndex(bC);
-        char erg = getChar(aI ^ bI);
-        return erg;
+        return getChar(aI ^ bI);
     }
 
     /**
@@ -64,7 +66,7 @@ class CrypterXOR extends CrypterCase {
      */
     private void checkKeyLength() {
         while (position >= key.getKey().length()) {
-            key = new Key(key.getKey() + key.getKey());
+            key = new Key<>(key.getKey() + key.getKey());
         }
     }
 
@@ -74,16 +76,16 @@ class CrypterXOR extends CrypterCase {
      * @param c char
      * @return int
      */
-    private int getIndex(char c) {
-        for (int i = 0; i < buchstabenZeichen.length; i++) {
-            if (c == buchstabenZeichen[i]) {
+    protected int getIndex(char c) {
+        for (int i = 0; i < BUCHSTABENZEICHEN.length; i++) {
+            if (c == BUCHSTABENZEICHEN[i]) {
                 return i;
             }
         }
         return 0;
     }
 
-    private char getChar(int i) {
-        return buchstabenZeichen[i];
+    protected char getChar(int i) {
+        return BUCHSTABENZEICHEN[i];
     }
 }

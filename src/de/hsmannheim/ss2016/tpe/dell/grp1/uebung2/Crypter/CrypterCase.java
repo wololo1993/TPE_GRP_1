@@ -1,32 +1,34 @@
 package de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.crypter;
 
- import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.exeption.CrypterException;
- import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.key.Key;
+import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.exeption.CrypterException;
+import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.key.Key;
+
 /**
+ * Parent Class of the CrypterTypes
+ *
  * @Author TPE_GRP_1
  */
 abstract class CrypterCase implements Crypter {
 
     protected Key key;
-    protected char chara;
     protected final int LENGTHA = 26;
-    protected final int codeA =((int) 'A') - 1;
 
-    /**
-     * set Key
-     * @param key Key
-     */
-    protected void setKey(Key key){
+    protected CrypterCase(Key key) {
         this.key = key;
     }
 
     /**
+     * set Key
+     *
+     * @param key Key
+     */
+
+    /**
      * casts this.char to uppercase
      */
-    protected void toUpperCase(){
-        this.chara =((chara+"").toUpperCase()).charAt(0);
+    protected char toUpperCase(char a) {
+        return ((a + "").toUpperCase()).charAt(0);
     }
-
 
     @Override
     public abstract void reset();
@@ -36,5 +38,6 @@ abstract class CrypterCase implements Crypter {
 
     @Override
     public abstract char entschluesseln(char cypherTextZeichen) throws CrypterException;
+
 
 }
