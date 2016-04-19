@@ -1,9 +1,12 @@
 package de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.key;
 
+import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.exeption.CrypterException;
+
 /**
- * Key der einen String enthält
+ * Key< T >der einen String enthält
  */
 public class Key<T> {
+
     private final T key;
 
     /**

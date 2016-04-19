@@ -9,7 +9,13 @@ import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.key.Key;
 class CrypterSubstitution extends CrypterCase {
 
     private final int EXPECTEDLENGTH = 26;
+    private final int codeAplus1 = codeA + 1;
 
+    /**
+     * Constructor
+     *
+     * @param key Key
+     */
     protected CrypterSubstitution(Key key) {
         super(key);
     }
@@ -23,9 +29,12 @@ class CrypterSubstitution extends CrypterCase {
 
         klartextZeichen = toUpperCase(klartextZeichen);
 
+        if (key == null) {
+            throw new CrypterException("Wrong key : Key is null");
+        }
 
         if (!keyLengthOK()) {
-            throw new CrypterException("Wrong Key length, should be : " + EXPECTEDLENGTH + " is : " + this.key.getKey().length());
+            throw new CrypterException("Wrong Key length in Substi. , should be : " + EXPECTEDLENGTH + " is : " + this.key.getKey().length());
         }
 
         if (isNotValidKey()) {
@@ -34,7 +43,7 @@ class CrypterSubstitution extends CrypterCase {
 
         int index;
 
-        index = ((int) klartextZeichen) - (((int) 'A'));
+        index = ((int) klartextZeichen) - (codeAplus1);
 
         return key.getKey().charAt(index);
 
@@ -45,9 +54,11 @@ class CrypterSubstitution extends CrypterCase {
         cypherTextZeichen = toUpperCase(cypherTextZeichen);
         char erg = 0;
 
-
+        if (key == null) {
+            throw new CrypterException("Wrong key : Key is null");
+        }
         if (this.key.getKey().length() != LENGTHA) {
-            throw new CrypterException("Wrong Key length, should be : " + EXPECTEDLENGTH + " is : " + this.key.getKey().length());
+            throw new CrypterException("Wrong Key length in Substi. , should be : " + EXPECTEDLENGTH + " is : " + this.key.getKey().length());
         }
 
         if (isNotValidKey()) {
@@ -56,7 +67,7 @@ class CrypterSubstitution extends CrypterCase {
 
         for (int i = 0; i < key.getKey().length(); i++) {
             if (cypherTextZeichen == key.getKey().charAt(i)) {
-                erg = (char) (i + (int) 'A');
+                erg = (char) (i + codeAplus1);
                 break;
             }
         }
@@ -65,6 +76,11 @@ class CrypterSubstitution extends CrypterCase {
         return erg;
     }
 
+    /**
+     * Checks if Keylength is okay if not returns false
+     *
+     * @return boolean
+     */
     private boolean keyLengthOK() {
         boolean ok = false;
         if (this.key.getKey().length() == LENGTHA) {
@@ -73,6 +89,11 @@ class CrypterSubstitution extends CrypterCase {
         return ok;
     }
 
+    /**
+     * Checks if whole Alphabet is in key return true if not valid
+     *
+     * @return boolean
+     */
     private boolean isNotValidKey() {
         boolean isValidKey = false;
         String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

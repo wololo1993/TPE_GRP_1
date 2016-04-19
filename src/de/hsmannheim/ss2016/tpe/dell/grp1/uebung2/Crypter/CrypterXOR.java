@@ -3,17 +3,27 @@ package de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.crypter;
 import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.exeption.CrypterException;
 import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.key.Key;
 
-class CrypterXOR extends CrypterCaseCodeA {
+class CrypterXOR extends CrypterCaseWGet {
     private int position = 0;
-    private final char[] BUCHSTABENZEICHEN = buchstabenZeichen();
+    private final char[] BUCHSTABENZEICHEN =  buchstabenZeichen();
 
+    /**
+     * Constructor
+     *
+     * @param key Key
+     */
     protected CrypterXOR(Key key) {
         super(key);
     }
 
+    /**
+     * crates char array BUCHSTABENZEICHEN
+     *
+     * @return
+     */
     private char[] buchstabenZeichen() {
         char[] buchstabenZeichen = new char[32];
-        for (int i = 1; i < LENGTHA + 1; i++) {
+        for (int i = 1; i <= LENGTHA; i++) {
             buchstabenZeichen[i] = (char) (codeA + i);
         }
         buchstabenZeichen[0] = '@';
@@ -35,6 +45,10 @@ class CrypterXOR extends CrypterCaseCodeA {
     @Override
     public char verschluesseln(char klartextZeichen) throws CrypterException {
         char erg;
+        klartextZeichen = toUpperCase(klartextZeichen);
+        if (key == null) {
+            throw new CrypterException("Wrong key : Key is null");
+        }
         checkKeyLength();
         erg = aXorB(klartextZeichen, key.getKey().charAt(position));
         position++;
@@ -70,12 +84,7 @@ class CrypterXOR extends CrypterCaseCodeA {
         }
     }
 
-    /**
-     * gets the index
-     *
-     * @param c char
-     * @return int
-     */
+
     protected int getIndex(char c) {
         for (int i = 0; i < BUCHSTABENZEICHEN.length; i++) {
             if (c == BUCHSTABENZEICHEN[i]) {

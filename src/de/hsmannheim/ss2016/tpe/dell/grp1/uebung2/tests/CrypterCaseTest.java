@@ -24,6 +24,7 @@ public class CrypterCaseTest {
     private String verschluesselString(String string, Crypter crypter) {
         String erg = "";
 
+
         for (int i = 0; i < string.length(); i++) {
             try {
                 erg = erg + crypter.verschluesseln(string.charAt(i)) + "";
@@ -55,6 +56,25 @@ public class CrypterCaseTest {
         return erg;
     }
 
+
+    @Test
+    public void testKombiOfAll(){
+        Key<String> keySUB =  new Key<>("QWEDSAVXYCFRTGZHBNJUIKMLOP");
+        Key<String> keyXOR =  new Key<>("UHSDSJK");
+        Key<String> keyCAESAR =  new Key<>("U");
+
+        Crypter sub = CrypterFactory.getCrypter("SUB",keySUB);
+        Crypter xor = CrypterFactory.getCrypter("XOR",keyXOR);
+        Crypter caesar = CrypterFactory.getCrypter("CAESAR",keyCAESAR);
+
+        String s = "MEssAgeZA";
+
+        assertEquals(s.toUpperCase(),entschluessleString(verschluesselString(s,sub),sub));
+        assertEquals(s.toUpperCase(),entschluessleString(verschluesselString(s,caesar),caesar));
+        String ergxor = verschluesselString(s,xor);
+        xor.reset();
+        assertEquals(s.toUpperCase(),entschluessleString(ergxor,xor));
+    }
 
     @Test
     public void testVerschluesselnCaesar() {
@@ -182,6 +202,4 @@ public class CrypterCaseTest {
         assertEquals("Hallo".toUpperCase(), entschluesselt);
 
     }
-
-
 }

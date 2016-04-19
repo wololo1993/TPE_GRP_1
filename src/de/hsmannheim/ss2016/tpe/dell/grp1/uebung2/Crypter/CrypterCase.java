@@ -12,19 +12,23 @@ abstract class CrypterCase implements Crypter {
 
     protected Key key;
     protected final int LENGTHA = 26;
+    protected final int codeA = ((int) 'A') - 1;
 
+    /**
+     *  Constructor
+     *
+     * @param key Key
+     */
     protected CrypterCase(Key key) {
         this.key = key;
     }
 
-    /**
-     * set Key
-     *
-     * @param key Key
-     */
 
     /**
-     * casts this.char to uppercase
+     * casts char a to upperCase
+     *
+     * @param a char
+     * @return char a in uppercase
      */
     protected char toUpperCase(char a) {
         return ((a + "").toUpperCase()).charAt(0);

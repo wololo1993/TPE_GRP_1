@@ -9,8 +9,11 @@ import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.key.Key;
  * @Author TPE_GRP_1
  */
 public class CrypterFactory {
+
+    private static String STRINGOFENUMS = fillStringOfEnum();
+
     /**
-     * gibt ein Crypter mit zugefuegtem Key zurück
+     * gibt ein Crypter mit zugefuegtem Key zurueck
      * needs the name of the wanted crypter as a String
      *
      * @param crypter String name of wanted Crypter
@@ -20,8 +23,8 @@ public class CrypterFactory {
     public static Crypter getCrypter(String crypter, Key key) {
         Crypter retcrypter = null;
         try {
-            if (!crypter.equals("XOR") && !crypter.equals("SUB") && !crypter.equals("CAESAR")) {
-                throw new CrypterException("Wrong Crypter name there is \"XOR\",\"SUB\",\"CAESAR\"");
+            if (isNotInEnum(crypter)) {
+                throw new CrypterException("Wrong Crypter name there is :" + crypter + ": should be " + STRINGOFENUMS);
             }
             switch (CrypterEnum.valueOf(crypter)) {
                 case XOR:
@@ -40,5 +43,36 @@ public class CrypterFactory {
             e.printStackTrace();
         }
         return retcrypter;
+    }
+
+
+    /**
+     * fills the "STRINGOFENUMS"
+     *
+     * @return String
+     */
+
+    private static boolean isNotInEnum(String crypter) {
+        boolean isNotInEnum = true;
+        String[] ary = STRINGOFENUMS.split(":");
+        for (String s : ary) {
+            if (crypter.equals(s)) {
+                isNotInEnum = false;
+            }
+        }
+        return isNotInEnum;
+    }
+
+    /**
+     * Fills the
+     *
+     * @return
+     */
+    private static String fillStringOfEnum() {
+        String s = ":";
+        for (CrypterEnum e : CrypterEnum.values()) {
+            s = s + e.name() + ":";
+        }
+        return s;
     }
 }
