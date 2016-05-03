@@ -1,6 +1,6 @@
-package de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.crypter;
+package de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.Crypter;
 
-import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.exeption.CrypterException;
+import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.Exeption.CrypterException;
 import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.key.Key;
 
 /**
@@ -8,8 +8,8 @@ import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.key.Key;
  */
 class CrypterSubstitution extends CrypterCase {
 
-    private final int EXPECTEDLENGTH = 26;
-    private final int codeAplus1 = codeA + 1;
+    private final int EXPECTEDLENGTH = 26; // bezieht sich auf key
+    private final int codeAplus1 = codeA + 1; // soll 0 sein wegen string
 
     /**
      * Constructor
@@ -43,9 +43,9 @@ class CrypterSubstitution extends CrypterCase {
 
         int index;
 
-        index = ((int) klartextZeichen) - (codeAplus1);
+        index = ((int) klartextZeichen) - (codeAplus1); 
 
-        return key.getKey().charAt(index);
+        return key.getKey().charAt(index); // string ist array von char, vertauscht char von 'falschem alpha'  
 
     }
 
@@ -65,8 +65,8 @@ class CrypterSubstitution extends CrypterCase {
             throw new CrypterException("Not whole Alphabet in Key ");
         }
 
-        for (int i = 0; i < key.getKey().length(); i++) {
-            if (cypherTextZeichen == key.getKey().charAt(i)) {
+        for (int i = 0; i < key.getKey().length(); i++) { // welche position char
+            if (cypherTextZeichen == key.getKey().charAt(i)) {  
                 erg = (char) (i + codeAplus1);
                 break;
             }
@@ -94,14 +94,14 @@ class CrypterSubstitution extends CrypterCase {
      *
      * @return boolean
      */
-    private boolean isNotValidKey() {
+    private boolean isNotValidKey() { // jeder buchstabe nur 1 mal?
         boolean isValidKey = false;
         String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-        for (int i = 0; i < ALPHABET.length(); i++) {
+        for (int i = 0; i < ALPHABET.length(); i++) { // durchläuft alphabet
             int haeufigkeit = 0;
             for (int j = 0; j < key.getKey().length(); j++) {
-                if (ALPHABET.charAt(i) == key.getKey().charAt(j)) {
+                if (ALPHABET.charAt(i) == key.getKey().charAt(j)) { // durchläuft ganzen key
                     haeufigkeit++;
                 }
             }

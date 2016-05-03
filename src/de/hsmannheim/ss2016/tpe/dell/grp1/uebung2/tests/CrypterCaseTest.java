@@ -2,10 +2,10 @@ package de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.tests;
 
 import org.junit.Test;
 
-import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.crypter.Crypter;
-import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.exeption.CrypterException;
+import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.Crypter.Crypter;
+import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.Exeption.CrypterException;
 import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.key.Key;
-import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.crypter.CrypterFactory;
+import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.Crypter.CrypterFactory;
 
 import static org.junit.Assert.*;
 
@@ -21,11 +21,11 @@ public class CrypterCaseTest {
      * @param crypter Crypter
      * @return String
      */
-    private String verschluesselString(String string, Crypter crypter) {
+    private String verschluesselString(String string, Crypter crypter) {  // nur auf interface von crypter zugreifbar
         String erg = "";
 
 
-        for (int i = 0; i < string.length(); i++) {
+        for (int i = 0; i < string.length(); i++) { // geht für jeden character durch
             try {
                 erg = erg + crypter.verschluesseln(string.charAt(i)) + "";
             } catch (CrypterException e) {
@@ -48,7 +48,7 @@ public class CrypterCaseTest {
 
         for (int i = 0; i < string.length(); i++) {
             try {
-                erg = erg + crypter.entschluesseln(string.charAt(i)) + "";
+                erg = erg + crypter.entschluesseln(string.charAt(i)) + ""; // try catch wegen exception
             } catch (CrypterException e) {
                 e.printStackTrace();
             }
@@ -72,7 +72,7 @@ public class CrypterCaseTest {
         assertEquals(s.toUpperCase(),entschluessleString(verschluesselString(s,sub),sub));
         assertEquals(s.toUpperCase(),entschluessleString(verschluesselString(s,caesar),caesar));
         String ergxor = verschluesselString(s,xor);
-        xor.reset();
+        xor.reset(); // da position gespeichert ist 
         assertEquals(s.toUpperCase(),entschluessleString(ergxor,xor));
     }
 

@@ -1,6 +1,6 @@
-package de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.crypter;
+package de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.Crypter;
 
-import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.exeption.CrypterException;
+import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.Exeption.CrypterException;
 
 /**
  * Grundlegendes Interface, um Verschl̈usselung durchzuf̈uhren. Mit
@@ -15,7 +15,7 @@ import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.exeption.CrypterException;
  * {@code zeichen == decrypt(encrypt(zeichen))}.
  *
  */
-public interface Crypter {
+public interface Crypter { //interface Vorlage (vererben)
     /**
      * Setzt die Verschl̈usselung zur̈uck. Diese Methode ist bei einigen
      * Verfahren sinnvoll, bei denen eine Position im Schl̈ussel verwaltet

@@ -1,6 +1,6 @@
-package de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.crypter;
+package de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.Crypter;
 
-import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.exeption.CrypterException;
+import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.Exeption.CrypterException;
 import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.key.Key;
 
 class CrypterXOR extends CrypterCaseWGet {
@@ -49,8 +49,8 @@ class CrypterXOR extends CrypterCaseWGet {
         if (key == null) {
             throw new CrypterException("Wrong key : Key is null");
         }
-        checkKeyLength();
-        erg = aXorB(klartextZeichen, key.getKey().charAt(position));
+        checkKeyLength(); // schaut ob string vom key überschritten wird
+        erg = aXorB(klartextZeichen, key.getKey().charAt(position)); // verschlüsselt um zu entschlüsseln
         position++;
         return erg;
     }
@@ -72,7 +72,7 @@ class CrypterXOR extends CrypterCaseWGet {
     private char aXorB(char aC, char bC) {
         int aI = getIndex(aC);
         int bI = getIndex(bC);
-        return getChar(aI ^ bI);
+        return getChar(aI ^ bI);  // Xor berechnung
     }
 
     /**
@@ -80,12 +80,12 @@ class CrypterXOR extends CrypterCaseWGet {
      */
     private void checkKeyLength() {
         while (position >= key.getKey().length()) {
-            key = new Key<>(key.getKey() + key.getKey());
+            key = new Key<>(key.getKey() + key.getKey()); 
         }
     }
 
 
-    protected int getIndex(char c) {
+    protected int getIndex(char c) { 
         for (int i = 0; i < BUCHSTABENZEICHEN.length; i++) {
             if (c == BUCHSTABENZEICHEN[i]) {
                 return i;

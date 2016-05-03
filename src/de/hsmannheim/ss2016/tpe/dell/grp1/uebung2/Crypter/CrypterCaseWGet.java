@@ -1,4 +1,4 @@
-package de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.crypter;
+package de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.Crypter;
 
 import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.key.Key;
 
@@ -26,7 +26,7 @@ public abstract class CrypterCaseWGet extends CrypterCase {
      * @param i int
      * @return char
      */
-    protected abstract char getChar(int i);
+    protected abstract char getChar(int i); // für klassen die von wg erben (absract müssen implementiert werden)
 
     /**
      * gets Index from char

@@ -1,6 +1,7 @@
-package de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.crypter;
 
-import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.exeption.CrypterException;
+package de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.Crypter;
+
+import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.Exeption.CrypterException;
 import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.key.Key;
 
 /**
@@ -20,10 +21,10 @@ public class CrypterFactory {
      * @param key     Key
      * @return Crypter Interface
      */
-    public static Crypter getCrypter(String crypter, Key key) {
+    public static Crypter getCrypter(String crypter, Key key) {  // gibt interface zurück
         Crypter retcrypter = null;
         try {
-            if (isNotInEnum(crypter)) {
+            if (isNotInEnum(crypter)) { // falls ja gleich abgefangen
                 throw new CrypterException("Wrong Crypter name there is :" + crypter + ": should be " + STRINGOFENUMS);
             }
             switch (CrypterEnum.valueOf(crypter)) {
@@ -40,7 +41,7 @@ public class CrypterFactory {
                     break;
             }
         } catch (CrypterException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // hier abgefangen 
         }
         return retcrypter;
     }
@@ -54,7 +55,7 @@ public class CrypterFactory {
 
     private static boolean isNotInEnum(String crypter) {
         boolean isNotInEnum = true;
-        String[] ary = STRINGOFENUMS.split(":");
+        String[] ary = STRINGOFENUMS.split(":"); // splitet an : und gibt enums zurück
         for (String s : ary) {
             if (crypter.equals(s)) {
                 isNotInEnum = false;
@@ -69,8 +70,8 @@ public class CrypterFactory {
      * @return
      */
     private static String fillStringOfEnum() {
-        String s = ":";
-        for (CrypterEnum e : CrypterEnum.values()) {
+        String s = ":"; // string erstellen
+        for (CrypterEnum e : CrypterEnum.values()) { // macht aus namen der enums string
             s = s + e.name() + ":";
         }
         return s;

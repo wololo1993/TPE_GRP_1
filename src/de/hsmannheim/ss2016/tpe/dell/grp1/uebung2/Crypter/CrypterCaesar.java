@@ -1,12 +1,12 @@
-package de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.crypter;
+package de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.Crypter;
 
-import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.exeption.CrypterException;
+import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.Exeption.CrypterException;
 import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.key.Key;
 
 /**
  * @Author TPE_GRP_1
  */
-class CrypterCaesar extends CrypterCaseWGet {
+class CrypterCaesar extends CrypterCaseWGet { // buchstaben der verschlüsselt werden soll, um jeweilige stelle nach rechts
 
     private final int EXPECTEDLENGTH = 1;
 
@@ -76,12 +76,12 @@ class CrypterCaesar extends CrypterCaseWGet {
      * @param i int
      * @return char
      */
-    protected char getChar(int i) {
-        while (i > LENGTHA) {
-            i = i - LENGTHA;
+    protected char getChar(int i) { //wichtig damit nicht über z geht
+        while (i > LENGTHA) { // index größer als länge vom alpha.?
+            i = i - LENGTHA; // zwei mal z
         }
         while (i < 1) {
-            i = LENGTHA + i;
+            i = LENGTHA + i; // a - z bei entschlüsseln
         }
         return (char) (i + codeA);
     }

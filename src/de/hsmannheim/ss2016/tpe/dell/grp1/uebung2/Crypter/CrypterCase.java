@@ -1,6 +1,6 @@
-package de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.crypter;
+package de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.Crypter;
 
-import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.exeption.CrypterException;
+import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.Exeption.CrypterException;
 import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.key.Key;
 
 /**
@@ -19,7 +19,7 @@ abstract class CrypterCase implements Crypter {
      *
      * @param key Key
      */
-    protected CrypterCase(Key key) {
+    protected CrypterCase(Key key) {  // übergibt key
         this.key = key;
     }
 
@@ -31,7 +31,7 @@ abstract class CrypterCase implements Crypter {
      * @return char a in uppercase
      */
     protected char toUpperCase(char a) {
-        return ((a + "").toUpperCase()).charAt(0);
+        return ((a + "").toUpperCase()).charAt(0); // char zu string, string zu uppercase
     }
 
     @Override
