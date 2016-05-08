@@ -15,7 +15,7 @@ public class CrypterFactory {
 
     /**
      * gibt ein Crypter mit zugefuegtem Key zurueck
-     * needs the name of the wanted crypter as a String
+     * needs the name of the wanted Crypter as a String
      *
      * @param crypter String name of wanted Crypter
      * @param key     Key

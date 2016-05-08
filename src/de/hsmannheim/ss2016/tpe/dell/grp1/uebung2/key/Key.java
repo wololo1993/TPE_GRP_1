@@ -1,6 +1,5 @@
 package de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.key;
 
-import de.hsmannheim.ss2016.tpe.dell.grp1.uebung2.Exeption.CrypterException;
 
 /**
  * Key< T >der einen String enthält

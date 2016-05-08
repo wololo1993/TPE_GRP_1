@@ -21,7 +21,7 @@ public class CrypterCaseTest {
      * @param crypter Crypter
      * @return String
      */
-    private String verschluesselString(String string, Crypter crypter) {  // nur auf interface von crypter zugreifbar
+    private String verschluesselString(String string, Crypter crypter) {  // nur auf interface von Crypter zugreifbar
         String erg = "";
 
 
