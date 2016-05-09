@@ -5,6 +5,8 @@ import de.hsmannheim.ss2016.tpe.dell.grp1.uebung3.member.MembershipList;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Map;
+
 import static org.junit.Assert.assertEquals;
 
 public class ClubTest {
@@ -81,7 +83,8 @@ public class ClubTest {
 
     @Test
     public void testToString(){
-        assertEquals("id: 1 Nachname: Ihme Vorname: Fabian Jahre im Verein: 88",((Member)cm.get(1)).toString());
+        assertEquals("id: 1; Nachname: Ihme; Vorname: Fabian; Jahre im Verein: 88;",cm.get(1).toString());
+
     }
 
     @Test
@@ -100,13 +103,15 @@ public class ClubTest {
 
     @Test
     public void test(){
-        cm.clear();
 
-        for(int i = 0; i < 200; i++){
-            cm.put(i,null);
-        }
 
-        System.out.println(cm);
+    cm.clear();
+
+    for(int i = 0; i < 20000000; i++){
+        cm.put(i,null);
+    }
+
+
     }
 
 

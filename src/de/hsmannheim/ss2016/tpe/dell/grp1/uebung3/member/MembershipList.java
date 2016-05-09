@@ -5,15 +5,15 @@ import de.hsmannheim.ss2016.tpe.dell.grp1.uebung3.member.Member;
 import java.util.*;
 
 /**
- *
- * @Author TPE_GRP_1
  * @param <K> Key
  * @param <V> Value
+ * @Author TPE_GRP_1
  */
 public class MembershipList<K, V> extends HashMap<K, V> implements Map<K, V> {
 
     /**
      * konstruktor mit Groesse der liste
+     *
      * @param i groesse
      */
     public MembershipList(int i) {
@@ -21,7 +21,7 @@ public class MembershipList<K, V> extends HashMap<K, V> implements Map<K, V> {
     }
 
     /**
-     * default konstruktor übergibt grösse 18
+     * default konstruktor übergibt grösse 16
      */
     public MembershipList() {
         super();
@@ -29,13 +29,14 @@ public class MembershipList<K, V> extends HashMap<K, V> implements Map<K, V> {
 
     /**
      * put(K,V) nur wenn key noch nicht vorhanden ansonsten return null;
+     *
      * @param key
      * @param value
      * @return V or null if k already exists
      */
     @Override
     public V put(K key, V value) {
-        if(this.containsKey(key)){
+        if (this.containsKey(key)) {
             return null;
         }
         return super.put(key, value);
@@ -43,6 +44,7 @@ public class MembershipList<K, V> extends HashMap<K, V> implements Map<K, V> {
 
     /**
      * put(Member) ruft put(K,V) auf
+     *
      * @param member
      * @return V or null if K already exists
      */
@@ -55,10 +57,14 @@ public class MembershipList<K, V> extends HashMap<K, V> implements Map<K, V> {
     @Override
     public String toString() {
         String s = "{\n";
-        for(V v : this.values()){
-            s = s+v.toString()+"\n";
+        for (Map.Entry<K, V> entry : this.entrySet()) {
+            if (entry.getValue() == null) {
+                s = s + "id : " + entry.getKey() + "; is empty\n";
+            } else {
+                s = s + entry.getValue() + "\n";
+            }
         }
-        s = s+"}";
+        s = s + "}";
 
         return s;
     }

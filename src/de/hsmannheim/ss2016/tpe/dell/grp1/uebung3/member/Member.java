@@ -28,7 +28,7 @@ public class Member {
 
 
     public String toString() {
-        return "id: " + idnr + "; Nachname: " + name + "; Vorname: " + vorname + "; Jahre im Verein: " + jahreVerein+";2";
+        return "id: " + idnr + "; Nachname: " + name + "; Vorname: " + vorname + "; Jahre im Verein: " + jahreVerein+";";
     }
 
     /**
