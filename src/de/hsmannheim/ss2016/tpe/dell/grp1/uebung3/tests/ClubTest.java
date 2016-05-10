@@ -19,12 +19,12 @@ public class ClubTest {
     MembershipList cm = new MembershipList(LIST_LENGTH);
 
     @Before
-    public void setUp(){
+    public void setUp() {
 
-        Member m1 = new Member(1,88,"Dauß","Dieter");
-        Member m2 = new Member(3,37,"Ihme","Inga");
-        Member m3 = new Member(5,412,"Hoggert","Hubert");
-        Member m4 = new Member(6,44,"Felizi","Felix");
+        Member m1 = new Member(1, 88, "Dauß", "Dieter");
+        Member m2 = new Member(3, 37, "Ihme", "Inga");
+        Member m3 = new Member(5, 412, "Hoggert", "Hubert");
+        Member m4 = new Member(6, 44, "Felizi", "Felix");
 
 
         cm.put(m1);
@@ -35,108 +35,108 @@ public class ClubTest {
     }
 
     @Test
-    public void testAdd(){
+    public void testAdd() {
 
-        Member m1 =new Member(2,3,"JOJO","Tiebert");
-        Member m2 = new Member(4,24,"bla","blublub");
+        Member m1 = new Member(2, 3, "JOJO", "Tiebert");
+        Member m2 = new Member(4, 24, "bla", "blublub");
 
         cm.put(m1);
-        cm.put(4,m2);
+        cm.put(4, m2);
 
-        assertEquals(cm.get(4),m2);
-        assertEquals(cm.get(2),m1);
+        assertEquals(cm.get(4), m2);
+        assertEquals(cm.get(2), m1);
 
-        Member m3 = new Member(2,4,"Blabla","Trololo");
+        Member m3 = new Member(2, 4, "Blabla", "Trololo");
 
         cm.put(m3);
 
-        assertEquals(m1,cm.get(2));
+        assertEquals(m1, cm.get(2));
 
 
         System.out.println(cm);
     }
 
     @Test
-    public void testRemove(){
+    public void testRemove() {
         cm.remove(1);
-        assertEquals(null,cm.get(1));
+        assertEquals(null, cm.get(1));
     }
 
     @Test
-    public void testGetter(){
-        assertEquals(1,((Member)cm.get(1)).getIdnr());
-        assertEquals(88,((Member)cm.get(1)).getJahreVerein());
-        assertEquals("Dauß",((Member)cm.get(1)).getNachname());
-        assertEquals("Dieter",((Member)cm.get(1)).getVorname());
+    public void testGetter() {
+        assertEquals(1, ((Member) cm.get(1)).getIdnr());
+        assertEquals(88, ((Member) cm.get(1)).getJahreVerein());
+        assertEquals("Dauß", ((Member) cm.get(1)).getNachname());
+        assertEquals("Dieter", ((Member) cm.get(1)).getVorname());
     }
 
     @Test
-    public void testSetter(){
+    public void testSetter() {
 
-        ((Member)cm.get(1)).setJahreVerein(4);
-        ((Member)cm.get(1)).setNachname("Gauss");
-        ((Member)cm.get(1)).setVorname("Gunther");
+        ((Member) cm.get(1)).setJahreVerein(4);
+        ((Member) cm.get(1)).setNachname("Gauss");
+        ((Member) cm.get(1)).setVorname("Gunther");
 
 
-        assertEquals(4,((Member)cm.get(1)).getJahreVerein());
-        assertEquals("Gauss",((Member)cm.get(1)).getNachname());
-        assertEquals("Gunther",((Member)cm.get(1)).getVorname());
+        assertEquals(4, ((Member) cm.get(1)).getJahreVerein());
+        assertEquals("Gauss", ((Member) cm.get(1)).getNachname());
+        assertEquals("Gunther", ((Member) cm.get(1)).getVorname());
     }
 
     @Test
-    public void testToString(){
-        assertEquals("id: 1; Nachname: Dauß; Vorname: Dieter; Jahre im Verein: 88;",cm.get(1).toString());
-
-    }
-
-    @Test
-    public void testSize(){
-        assertEquals(4,cm.size());
-        cm.put(new Member(7,38,"hi","ho"));
-        assertEquals(5,cm.size());
+    public void testToString() {
+        assertEquals("id: 1; Nachname: Dauß; Vorname: Dieter; Jahre im Verein: 88;", cm.get(1).toString());
 
     }
 
     @Test
-    public void testClear(){
+    public void testSize() {
+        assertEquals(4, cm.size());
+        cm.put(new Member(7, 38, "hi", "ho"));
+        assertEquals(5, cm.size());
+
+    }
+
+    @Test
+    public void testClear() {
         cm.clear();
-        assertEquals(0,cm.size());
+        assertEquals(0, cm.size());
     }
 
     @Test
-    public void testEqualsHashCode(){
-        assertEquals(cm.get(3),new Member(3,37,"Ihme","Inga"));
-        assertFalse(cm.get(3)==new Member(3,37,"Ihme","Inga"));
+    public void testEqualsHashCode() {
+        assertEquals(cm.get(3), new Member(3, 37, "Ihme", "Inga"));
+        assertFalse(cm.get(3) == new Member(3, 37, "Ihme", "Inga"));
 
-        assertEquals(cm.get(3).hashCode(),(new Member(3,37,"Ihme","Inga").hashCode()));
+        assertEquals(cm.get(3).hashCode(), (new Member(3, 37, "Ihme", "Inga").hashCode()));
     }
 
     @Test
-    public void testAddAll(){
-        MembershipList cm2 = new MembershipList<Integer,Member>();
+    public void testAddAll() {
+        MembershipList cm2 = new MembershipList<Integer, Member>();
         cm2.putAll(cm);
-        assertEquals(cm,cm2);
+        assertEquals(cm, cm2);
     }
 
     @Test
-    public void testEqualsExeption(){
-        try{
+    public void testEqualsExeption() {
+        try {
             cm.get(2).equals(null);
             fail();
-        } catch (Exception e){
+        } catch (Exception e) {
 
         }
     }
 
+    /**
+     * Testet ClubManagement hat dementsprechend Consolenausgabe
+     */
+    /*
     @Test
-    public void test(){
+    public void testClubManagement() {
+
         ClubManagment.main(null);
-    }
-
-
-
-
-
+    }*/
 
 
 }
