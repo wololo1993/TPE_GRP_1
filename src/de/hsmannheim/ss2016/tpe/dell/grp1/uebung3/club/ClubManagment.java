@@ -5,7 +5,7 @@ import de.hsmannheim.ss2016.tpe.dell.grp1.uebung3.member.MembershipList;
 
 public class ClubManagment {
 
-    public static void main(String args[]) {
+    public static void main(String [] args) {
 
         MembershipList<Integer, Member> list = new MembershipList();
 

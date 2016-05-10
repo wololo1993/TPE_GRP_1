@@ -26,6 +26,28 @@ public class Member {
         this.vorname = vorname;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;         //ref gleich
+        if (o == null || getClass() != o.getClass()) return false; // o ist null oder o / this versch. Class
+
+        Member member = (Member) o;  // da object hier aufjedenfall Member is
+
+        if (idnr != member.idnr) return false;
+        if (jahreVerein != member.jahreVerein) return false;
+        if (!name.equals(member.name)) return false;
+        return vorname.equals(member.vorname);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = idnr;
+        result = 31 * result + jahreVerein;
+        result = 31 * result + name.hashCode();
+        result = 31 * result + vorname.hashCode();
+        return result;
+    }
 
     public String toString() {
         return "id: " + idnr + "; Nachname: " + name + "; Vorname: " + vorname + "; Jahre im Verein: " + jahreVerein+";";

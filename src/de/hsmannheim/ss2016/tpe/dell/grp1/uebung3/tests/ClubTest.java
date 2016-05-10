@@ -1,5 +1,6 @@
 package de.hsmannheim.ss2016.tpe.dell.grp1.uebung3.tests;
 
+import de.hsmannheim.ss2016.tpe.dell.grp1.uebung3.club.ClubManagment;
 import de.hsmannheim.ss2016.tpe.dell.grp1.uebung3.member.Member;
 import de.hsmannheim.ss2016.tpe.dell.grp1.uebung3.member.MembershipList;
 import org.junit.Before;
@@ -8,6 +9,8 @@ import org.junit.Test;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.fail;
 
 public class ClubTest {
 
@@ -18,10 +21,10 @@ public class ClubTest {
     @Before
     public void setUp(){
 
-        Member m1 = new Member(1,88,"Ihme","Fabian");
-        Member m2 = new Member(3,37,"Ihme","Fabiihme");
-        Member m3 = new Member(5,412,"Ihme","Fabio");
-        Member m4 = new Member(6,44,"Ihme","Fag");
+        Member m1 = new Member(1,88,"Dauß","Dieter");
+        Member m2 = new Member(3,37,"Ihme","Inga");
+        Member m3 = new Member(5,412,"Hoggert","Hubert");
+        Member m4 = new Member(6,44,"Felizi","Felix");
 
 
         cm.put(m1);
@@ -56,7 +59,6 @@ public class ClubTest {
     @Test
     public void testRemove(){
         cm.remove(1);
-
         assertEquals(null,cm.get(1));
     }
 
@@ -64,8 +66,8 @@ public class ClubTest {
     public void testGetter(){
         assertEquals(1,((Member)cm.get(1)).getIdnr());
         assertEquals(88,((Member)cm.get(1)).getJahreVerein());
-        assertEquals("Ihme",((Member)cm.get(1)).getNachname());
-        assertEquals("Fabian",((Member)cm.get(1)).getVorname());
+        assertEquals("Dauß",((Member)cm.get(1)).getNachname());
+        assertEquals("Dieter",((Member)cm.get(1)).getVorname());
     }
 
     @Test
@@ -83,7 +85,7 @@ public class ClubTest {
 
     @Test
     public void testToString(){
-        assertEquals("id: 1; Nachname: Ihme; Vorname: Fabian; Jahre im Verein: 88;",cm.get(1).toString());
+        assertEquals("id: 1; Nachname: Dauß; Vorname: Dieter; Jahre im Verein: 88;",cm.get(1).toString());
 
     }
 
@@ -102,17 +104,36 @@ public class ClubTest {
     }
 
     @Test
+    public void testEqualsHashCode(){
+        assertEquals(cm.get(3),new Member(3,37,"Ihme","Inga"));
+        assertFalse(cm.get(3)==new Member(3,37,"Ihme","Inga"));
+
+        assertEquals(cm.get(3).hashCode(),(new Member(3,37,"Ihme","Inga").hashCode()));
+    }
+
+    @Test
+    public void testAddAll(){
+        MembershipList cm2 = new MembershipList<Integer,Member>();
+        cm2.putAll(cm);
+        assertEquals(cm,cm2);
+    }
+
+    @Test
+    public void testEqualsExeption(){
+        try{
+            cm.get(2).equals(null);
+            fail();
+        } catch (Exception e){
+
+        }
+    }
+
+    @Test
     public void test(){
-
-
-    cm.clear();
-
-    for(int i = 0; i < 20000000; i++){
-        cm.put(i,null);
+        ClubManagment.main(null);
     }
 
 
-    }
 
 
 
