@@ -20,6 +20,9 @@ public class Zug implements Runnable {
 
     @Override
     public void run() {
+        synchronized (printLock) {
+            printLock.notify();
+        }
 
         while (running) {
             int count = geschwindigkeit;
@@ -37,7 +40,9 @@ public class Zug implements Runnable {
                 if (nextBlock != null && nextBlock.getStart() == position + 1 && nextBlock.isLocked()) {
                     synchronized (nextBlock) {
                         try {
-                            nextBlock.wait();
+                            while (nextBlock.isLocked()) {
+                                nextBlock.wait();
+                            }
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -73,17 +78,27 @@ public class Zug implements Runnable {
                     }
                 }
             }
-
-
         }
     }
 
-    public int getPosition() {
+    public synchronized int getPosition() {
         return position;
     }
 
     public char getName() {
         return name;
+    }
+
+    public synchronized boolean getRunning() {
+        return running;
+    }
+
+    public synchronized void setRunning(boolean running) {
+        this.running = running;
+    }
+
+    public synchronized Zug getZug() {
+        return this;
     }
 
 

@@ -2,51 +2,110 @@ package de.hsmannheim.ss2016.tpe.dell.grp1.uebung4;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.LinkedList;
 
 public class Simulation implements Runnable {
 
+    private boolean running = true;
     private Strecke strecke;
     private Zug[] zuege;
     private Object printLock;
-    private boolean running = true;
+    private HashMap<Integer,LinkedList<Zug>> globalCrashMap;
 
     private JFrame frame;
-    private JTextArea txt;
+    private JTextArea trainTrack;
+    private JTextArea finished;
+    private JTextArea crashed;
+
+    String crashedString = "";
 
     public static void main(String[] args) {
 
-        Strecke strecke = new Strecke(70);
+        JFrame chooseFrame = new JFrame();
+        chooseFrame.setLayout(new FlowLayout());
 
-        Block[] blocks = new Block[8];
+        JButton sim1 = new JButton("sim1");
+        JButton sim2 = new JButton("sim2");
 
-        blocks[0] = new Block(10, 0);
-        blocks[1] = new Block(5, 10);
-        blocks[2] = new Block(10, 15);
-        blocks[3] = new Block(10, 25);
-        blocks[4] = new Block(15, 35);
-        blocks[5] = new Block(10, 50);
-        blocks[6] = new Block(5, 60);
-        blocks[7] = new Block(5, 65);
+        chooseFrame.getContentPane().add(sim1);
+        chooseFrame.getContentPane().add(sim2);
 
-        for (int i = 0; i < blocks.length; i++) {
-            strecke.addBlock(blocks[i]);
-        }
+        sim1.addActionListener(e -> {
+            Strecke strecke = new Strecke(70);
 
-        Zug[] zuege = new Zug[5];
+            Block[] blocks = new Block[8];
 
-        Object printLock = new Object();
+            blocks[0] = new Block(10, 0);
+            blocks[1] = new Block(5, 10);
+            blocks[2] = new Block(10, 15);
+            blocks[3] = new Block(10, 25);
+            blocks[4] = new Block(15, 35);
+            blocks[5] = new Block(10, 50);
+            blocks[6] = new Block(5, 60);
+            blocks[7] = new Block(5, 65);
 
-        zuege[0] = new Zug(6, 'A', 100, strecke, printLock);
-        zuege[1] = new Zug(11, 'B', 15, strecke, printLock);
-        zuege[2] = new Zug(20, 'C', 5, strecke, printLock);
-        zuege[3] = new Zug(30, 'D', 10, strecke, printLock);
-        zuege[4] = new Zug(45, 'E', 6, strecke, printLock);
+            for (int i = 0; i < blocks.length; i++) {
+                strecke.addBlock(blocks[i]);
+            }
+
+            Zug[] zuege = new Zug[5];
+
+            Object printLock = new Object();
+
+            zuege[0] = new Zug(6, 'A', 5, strecke, printLock);
+            zuege[1] = new Zug(11, 'B', 15, strecke, printLock);
+            zuege[2] = new Zug(20, 'C', 5, strecke, printLock);
+            zuege[3] = new Zug(30, 'D', 10, strecke, printLock);
+            zuege[4] = new Zug(45, 'E', 6, strecke, printLock);
 
 
+            Simulation sim = new Simulation(strecke, zuege, printLock);
 
-        Simulation sim = new Simulation(strecke, zuege, printLock);
+            chooseFrame.setVisible(false);
+        });
+
+        sim2.addActionListener(e -> {
+
+
+            Strecke strecke = new Strecke(70);
+
+            Block[] blocks = new Block[8];
+
+            blocks[0] = new Block(10, 0);
+            blocks[1] = new Block(5, 10);
+            blocks[2] = new Block(10, 15);
+            blocks[3] = new Block(10, 25);
+            blocks[4] = new Block(15, 35);
+            blocks[5] = new Block(10, 50);
+            blocks[6] = new Block(5, 60);
+            blocks[7] = new Block(5, 65);
+
+            for (int i = 0; i < blocks.length; i++) {
+                strecke.addBlock(blocks[i]);
+            }
+
+            Zug[] zuege = new Zug[5];
+
+            Object printLock = new Object();
+
+            zuege[0] = new Zug(1, 'A', 5, strecke, printLock);
+            zuege[1] = new Zug(2, 'B', 15, strecke, printLock);
+            zuege[2] = new Zug(3, 'C', 5, strecke, printLock);
+            zuege[3] = new Zug(4, 'D', 10, strecke, printLock);
+            zuege[4] = new Zug(5, 'E', 6, strecke, printLock);
+
+
+            Simulation sim = new Simulation(strecke, zuege, printLock);
+            ((JButton)e.getSource()).setVisible(false);
+            chooseFrame.setVisible(false);
+        });
+
+
+        chooseFrame.setSize(200,70);
+        chooseFrame.setLocationRelativeTo(null);
+        chooseFrame.setVisible(true);
+
 
     }
 
@@ -55,7 +114,16 @@ public class Simulation implements Runnable {
         this.zuege = zuege;
         this.printLock = printLock;
 
-        txt = new JTextArea();
+        globalCrashMap = new HashMap<>();
+
+        crashed = new JTextArea();
+        finished = new JTextArea();
+        trainTrack = new JTextArea();
+
+        crashed.setEnabled(false);
+        finished.setEnabled(false);
+        trainTrack.setEnabled(false);
+
         JButton button = new JButton("Start");
         button.addActionListener(e -> {
             Thread x = new Thread(this);
@@ -64,12 +132,14 @@ public class Simulation implements Runnable {
         });
         frame = new JFrame();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setSize(600,100);
+        frame.setSize(600, 100);
         frame.setBackground(Color.cyan);
         frame.setLayout(new FlowLayout());
-        frame.add(txt);
+        frame.add(trainTrack);
         frame.add(button);
-
+        frame.add(finished);
+        frame.add(crashed);
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
     }
@@ -90,10 +160,8 @@ public class Simulation implements Runnable {
             threads[i].start();
         }
 
-        while (running) {
 
-           // System.err.println(addZuege());
-            txt.setText(addZuege());
+        while (running) {
 
             synchronized (printLock) {
                 try {
@@ -103,16 +171,55 @@ public class Simulation implements Runnable {
                 }
             }
 
+            System.out.println(addZuege());
+            trainTrack.setText(addZuege());
 
         }
-
+        System.out.println("Print is Fertig");
     }
 
     private String addZuege() {
+        HashMap<Integer, Zug> localCrashMap = new HashMap<>();
+        String finishedString = "";
+
         String s = strecke.getString();
+
         int count = 0;
+        int allFinished = 0;
+
         for (Zug zug : zuege) {
-            if(zug.getPosition() >= strecke.length){
+
+            if (!zug.getRunning()) {
+                allFinished++;
+                finishedString += "Zug " + zug.getName() + " is finished\n";
+            } else {
+                Zug crashed = localCrashMap.put(zug.getPosition(), zug.getZug());
+                boolean crashedCrash = globalCrashMap.containsKey(zug.getPosition());
+
+                if(crashedCrash){
+                    try {
+                        throw new SimulationException(zug,globalCrashMap.get(zug.getPosition()));
+                    } catch (SimulationException e) {
+                        e.printStackTrace();
+                        globalCrashMap.get(zug.getPosition()).add(zug);
+                    }
+                }
+
+                if (crashed != null) {
+                    try {
+                        throw new SimulationException(crashed,localCrashMap.get(crashed.getPosition()));
+                    } catch (SimulationException e) {
+                        e.printStackTrace();
+                        LinkedList<Zug> list = new LinkedList();
+                        list.add(zug);
+                        list.add(crashed);
+                        globalCrashMap.put(zug.getPosition(),list);
+                        crashedString += "Crahed :" + crashed.getPosition() +
+                                " Zuge :" + localCrashMap.get(crashed.getPosition()).getName() + " " + crashed.getName()+"\n";
+                    }
+                }
+            }
+            if (zug.getPosition() >= strecke.length) {
                 s += zug.getName();
                 count++;
             } else {
@@ -121,9 +228,13 @@ public class Simulation implements Runnable {
             }
         }
 
+        if(allFinished >= zuege.length){
+            this.running = false;
+        }
+
+        finished.setText(finishedString);
+        crashed.setText(crashedString);
         return s;
 
     }
-
-
 }

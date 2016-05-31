@@ -4,7 +4,6 @@ public class Strecke {
 
     int length;
     Block[] array;
-    private int blocksLength = 0;
 
     String strecke = "";
 
@@ -23,7 +22,7 @@ public class Strecke {
 
     }
 
-    public void updateString() {
+    private void updateString() {
         String s = "";
         for (int i = 0; i < length; i++) {
             if (array[i] != null) {
