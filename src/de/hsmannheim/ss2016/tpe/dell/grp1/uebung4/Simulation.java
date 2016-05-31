@@ -5,6 +5,9 @@ import java.awt.*;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+/**
+ * @Author TPE_GRP_1
+ */
 public class Simulation implements Runnable {
 
     private boolean running = true;
@@ -18,15 +21,19 @@ public class Simulation implements Runnable {
     private JTextArea finished;
     private JTextArea crashed;
 
-    String crashedString = "";
+    private String crashedString = "";
 
+    /**
+     * Macht ein Frame Sichtbar der 2 Buttons enthält die jeweils eine Simulation machen
+     * @param args
+     */
     public static void main(String[] args) {
 
         JFrame chooseFrame = new JFrame();
         chooseFrame.setLayout(new FlowLayout());
 
-        JButton sim1 = new JButton("sim1");
-        JButton sim2 = new JButton("sim2");
+        JButton sim1 = new JButton("Simulation");
+        JButton sim2 = new JButton("Crashes");
 
         chooseFrame.getContentPane().add(sim1);
         chooseFrame.getContentPane().add(sim2);
@@ -45,22 +52,22 @@ public class Simulation implements Runnable {
             blocks[6] = new Block(5, 60);
             blocks[7] = new Block(5, 65);
 
-            for (int i = 0; i < blocks.length; i++) {
-                strecke.addBlock(blocks[i]);
+            for (Block block : blocks) {
+                strecke.addBlock(block);
             }
 
             Zug[] zuege = new Zug[5];
 
             Object printLock = new Object();
 
-            zuege[0] = new Zug(6, 'A', 5, strecke, printLock);
+            zuege[0] = new Zug(0, 'A', 5, strecke, printLock);
             zuege[1] = new Zug(11, 'B', 15, strecke, printLock);
             zuege[2] = new Zug(20, 'C', 5, strecke, printLock);
             zuege[3] = new Zug(30, 'D', 10, strecke, printLock);
             zuege[4] = new Zug(45, 'E', 6, strecke, printLock);
 
 
-            Simulation sim = new Simulation(strecke, zuege, printLock);
+            new Simulation(strecke, zuege, printLock);
 
             chooseFrame.setVisible(false);
         });
@@ -81,8 +88,8 @@ public class Simulation implements Runnable {
             blocks[6] = new Block(5, 60);
             blocks[7] = new Block(5, 65);
 
-            for (int i = 0; i < blocks.length; i++) {
-                strecke.addBlock(blocks[i]);
+            for (Block block : blocks) {
+                strecke.addBlock(block);
             }
 
             Zug[] zuege = new Zug[5];
@@ -96,19 +103,27 @@ public class Simulation implements Runnable {
             zuege[4] = new Zug(5, 'E', 6, strecke, printLock);
 
 
-            Simulation sim = new Simulation(strecke, zuege, printLock);
-            ((JButton)e.getSource()).setVisible(false);
+            new Simulation(strecke, zuege, printLock);
+
             chooseFrame.setVisible(false);
         });
 
 
-        chooseFrame.setSize(200,70);
+        chooseFrame.setSize(300,70);
         chooseFrame.setLocationRelativeTo(null);
         chooseFrame.setVisible(true);
 
 
     }
 
+
+    /**
+     * constructor erstellt neuen frame mit der Erstellten Strecke Zuege etc
+     * mit startButton der aus dem Object ein Thread macht und ihn startet
+     * @param strecke Strecke
+     * @param zuege Zug[]
+     * @param printLock Object
+     */
     public Simulation(Strecke strecke, Zug[] zuege, Object printLock) {
         this.strecke = strecke;
         this.zuege = zuege;
@@ -130,6 +145,7 @@ public class Simulation implements Runnable {
             x.start();
             button.setVisible(false);
         });
+
         frame = new JFrame();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(600, 100);
@@ -144,6 +160,13 @@ public class Simulation implements Runnable {
 
     }
 
+    /**
+     * Run Methode ruft initLocks auf und startet alle zuege
+     * dann wartet sie so lange am printLock bis jmd es aufruft
+     * wenn aufgerufen printet es auf die console bzw in das TextFeld
+     *
+     * (überprüft auch auf Crashes)
+     */
     @Override
     public void run() {
 
@@ -160,6 +183,9 @@ public class Simulation implements Runnable {
             threads[i].start();
         }
 
+        System.out.println(updateZuge());
+        trainTrack.setText(updateZuge());
+
 
         while (running) {
 
@@ -171,14 +197,18 @@ public class Simulation implements Runnable {
                 }
             }
 
-            System.out.println(addZuege());
-            trainTrack.setText(addZuege());
+            System.out.println(updateZuge());
+            trainTrack.setText(updateZuge());
 
         }
-        System.out.println("Print is Fertig");
     }
 
-    private String addZuege() {
+    /**
+     * iteriert alle Züge
+     * prüft auf crashes, dann
+     * @return
+     */
+    private String updateZuge() {
         HashMap<Integer, Zug> localCrashMap = new HashMap<>();
         String finishedString = "";
 
@@ -189,51 +219,54 @@ public class Simulation implements Runnable {
 
         for (Zug zug : zuege) {
 
-            if (!zug.getRunning()) {
+            //Crash Abfrage Beginn
+            if (!zug.getRunning()) {        //Zug Beendet
                 allFinished++;
                 finishedString += "Zug " + zug.getName() + " is finished\n";
             } else {
                 Zug crashed = localCrashMap.put(zug.getPosition(), zug.getZug());
                 boolean crashedCrash = globalCrashMap.containsKey(zug.getPosition());
 
-                if(crashedCrash){
+                if(crashedCrash){ //wenn in Unfall reingefahren
                     try {
                         throw new SimulationException(zug,globalCrashMap.get(zug.getPosition()));
                     } catch (SimulationException e) {
                         e.printStackTrace();
-                        globalCrashMap.get(zug.getPosition()).add(zug);
+                        globalCrashMap.get(zug.getPosition()).add(zug); //füge neuen Zug an den Crash an
+                        crashedString += "Crashed :"+zug.getName()+" in Crash at :"+zug.getPosition();
                     }
                 }
 
-                if (crashed != null) {
+                if (crashed != null) { //Neuer Unfall
                     try {
                         throw new SimulationException(crashed,localCrashMap.get(crashed.getPosition()));
                     } catch (SimulationException e) {
                         e.printStackTrace();
-                        LinkedList<Zug> list = new LinkedList();
-                        list.add(zug);
-                        list.add(crashed);
+                        LinkedList<Zug> list = new LinkedList();        //Macht einen neuen Crash an der position
+                        list.add(zug);                                  // in der globalCrashMap
+                        list.add(crashed);                              // und fügt beide Züge an
                         globalCrashMap.put(zug.getPosition(),list);
-                        crashedString += "Crahed :" + crashed.getPosition() +
+                        crashedString += "Crashed :" + crashed.getPosition() +
                                 " Zuge :" + localCrashMap.get(crashed.getPosition()).getName() + " " + crashed.getName()+"\n";
                     }
                 }
-            }
-            if (zug.getPosition() >= strecke.length) {
+            } //Crash Abfrage Ende
+
+            if (zug.getPosition() >= strecke.length) {      //wenn zug länger als Strecke häng ihn einfach hinten an;
                 s += zug.getName();
                 count++;
-            } else {
+            } else {                                        // ansonsten per Substring an seiner Position
                 s = s.substring(0, zug.getPosition() + count + 1) + zug.getName() + s.substring(zug.getPosition() + count + 1);
                 count++;
             }
         }
 
         if(allFinished >= zuege.length){
-            this.running = false;
+            this.running = false;           //Wenn alle beendet dann soll die Sim aufhören
         }
 
-        finished.setText(finishedString);
-        crashed.setText(crashedString);
+        finished.setText(finishedString);   //frame ausgabe für alle beendeten
+        crashed.setText(crashedString);     //frame ausgabe für alle crashes
         return s;
 
     }
