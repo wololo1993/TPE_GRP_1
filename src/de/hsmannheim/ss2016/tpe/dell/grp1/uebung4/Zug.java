@@ -33,7 +33,6 @@ public class Zug implements Runnable {
         this.name = name;
         this.strecke = strecke;
         this.printLock = printLock;
-        System.err.println("Zug "+getName()+" @ "+getPosition());
     }
 
     /**
@@ -75,12 +74,11 @@ public class Zug implements Runnable {
                     }
                 }
             }
-
-            position++;
-            System.err.println("Zug "+getName()+" @ "+getPosition());
             synchronized (printLock) {                  //Gib dem Printlock bescheid und geh eine position Weiter
                 printLock.notify();
             }
+            position++;
+
 
 
             if (this.position >= strecke.length) {          //Wenn deine Position Größer ist Als Streckenlänge

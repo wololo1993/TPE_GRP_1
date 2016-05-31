@@ -60,7 +60,7 @@ public class Simulation implements Runnable {
 
             Object printLock = new Object();
 
-            zuege[0] = new Zug(0, 'A', 5, strecke, printLock);
+            zuege[0] = new Zug(6, 'A', 5, strecke, printLock);
             zuege[1] = new Zug(11, 'B', 15, strecke, printLock);
             zuege[2] = new Zug(20, 'C', 5, strecke, printLock);
             zuege[3] = new Zug(30, 'D', 10, strecke, printLock);
@@ -173,18 +173,22 @@ public class Simulation implements Runnable {
         Thread[] threads = new Thread[zuege.length];
 
 
+
         strecke.initLocks(zuege);
+
+        System.out.println(updateZuge());
+        trainTrack.setText(updateZuge());
 
         for (int i = 0; i < zuege.length; i++) {
             threads[i] = new Thread(zuege[i]);
         }
 
+
+
+
         for (int i = 0; i < threads.length; i++) {
             threads[i].start();
         }
-
-        System.out.println(updateZuge());
-        trainTrack.setText(updateZuge());
 
 
         while (running) {
